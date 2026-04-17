@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#1A141F</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#8B1EAE</color>
+    <color name="grey">#E5E7EB</color>
+    <color name="light_black">#666269</color>
+    <color name="red">#BC0E30</color>
+    <color name="divider_soft_grey">#E3E1E2</color>
+    <color name="tab_item_bg_color">#F3E9F7</color>
+    <color name="dark_grey">#969398</color>
+    <color name="ash">#666269</color>
+    <color name="richbrownorange">#7C2D12</color>
+    <color name="soft_gray">#B1AFB0</color>
+    <color name="light_purple">#DBB9E6</color>
+    <color name="perfume_haze">#F3E9F7</color>
+    <color name="lavender">#F3E9F7</color>
+</resources>
