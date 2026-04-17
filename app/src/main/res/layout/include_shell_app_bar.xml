@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shellAppBar"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/screen_horizontal_margin"
+    android:layout_marginTop="@dimen/screen_top_margin"
+    android:background="@color/white"
+    android:padding="0dp"
+    app:elevation="@dimen/_10sdp"
+    app:statusBarForeground="@android:color/transparent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/shellToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="@dimen/_68sdp"
+        android:paddingHorizontal="@dimen/top_bar_padding_h"
+        android:paddingVertical="@dimen/top_bar_padding_v"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:titleCentered="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/logoImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/top_bar_logo_height"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/top_bar_logo"
+                android:scaleType="fitStart"
+                android:src="@drawable/aivastra_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/appBarActionGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/helpCard"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_14sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/strokeLight"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/support_icon"
+                        android:src="@drawable/ic_support"
+                        app:tint="@color/appBarIconTint" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/creditCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_45sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_14sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/appBarPillStroke"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:paddingStart="@dimen/_18sdp"
+                            android:paddingEnd="@dimen/_18sdp"
+                            android:text="@string/credits_text"
+                            android:textColor="@color/appBarTextStrong"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <FrameLayout
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="match_parent"
+                            android:background="@color/appBarAccent">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/credits_icon"
+                                android:src="@drawable/ic_credit_coin"
+                                app:tint="@color/richbrownorange" />
+                        </FrameLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+</com.google.android.material.appbar.AppBarLayout>

@@ -9,10 +9,34 @@
     <color name="divider_soft_grey">#E3E1E2</color>
     <color name="tab_item_bg_color">#F3E9F7</color>
     <color name="dark_grey">#969398</color>
-    <color name="ash">#666269</color>
+    <color name="ash">#6B7280</color>
     <color name="richbrownorange">#7C2D12</color>
     <color name="soft_gray">#B1AFB0</color>
     <color name="light_purple">#DBB9E6</color>
     <color name="perfume_haze">#F3E9F7</color>
     <color name="lavender">#F3E9F7</color>
+    <color name="screenBackground">#FFF8FC</color>
+    <color name="surfaceCard">#FFFFFFFF</color>
+    <color name="primaryContainer">#F5EBFF</color>
+    <color name="strokeLight">#E8E2EC</color>
+    <color name="textPrimary">#1F1332</color>
+    <color name="textSecondary">#7E728D</color>
+    <color name="textMuted">#A79CB1</color>
+    <color name="successSoft">#E9FFF3</color>
+    <color name="successText">#177245</color>
+    <color name="uploadBorder">#E5DDF0</color>
+    <color name="placeholderWarmTop">#EAD6C5</color>
+    <color name="placeholderWarmBottom">#AD7658</color>
+    <color name="placeholderArchTop">#F5E7D8</color>
+    <color name="placeholderArchBottom">#C69B78</color>
+    <color name="placeholderWindowTop">#D9D2CC</color>
+    <color name="placeholderWindowBottom">#8E8278</color>
+    <color name="bottomNavInactive">#8B8195</color>
+    <color name="dividerLight">#F1EAF5</color>
+
+    <color name="lightyellow">#FFF0CC</color>
+    <color name="appBarIconTint">#666D7A</color>
+    <color name="appBarPillStroke">#F6D788</color>
+    <color name="appBarAccent">#F8B318</color>
+    <color name="appBarTextStrong">#26242B</color>
 </resources>

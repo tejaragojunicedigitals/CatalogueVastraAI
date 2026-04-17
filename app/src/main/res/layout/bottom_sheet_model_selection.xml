@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/surface_card_padding_h"
+    android:paddingTop="@dimen/top_bar_padding_v"
+    android:paddingBottom="@dimen/screen_vertical_gap">
+
+    <View
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/strokeLight" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/modelSheetTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/model_sheet_title"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/sheet_title_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:contentDescription="@string/cancel"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/textSecondary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/satoshi_regular"
+            android:text="@string/model_sheet_subtitle"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/sheet_subtitle_size"
+            app:layout_constraintEnd_toStartOf="@id/closeButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/modelSheetTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/modelTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:tabGravity="start"
+        app:tabIndicatorColor="@color/primaryColor"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabSelectedTextColor="@color/primaryColor"
+        app:tabTextAppearance="@style/TextAppearance.Material3.LabelMedium"
+        app:tabTextColor="@color/textSecondary" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/libraryFilterRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_chip_option" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/modelGridRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_grid_height"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_model_grid" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelButton"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_medium"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/textPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/applyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/sheet_button_height"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/satoshi_bold"
+            android:text="@string/apply_selection"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
+            app:backgroundTint="@color/primaryColor"
+            app:cornerRadius="@dimen/sheet_button_radius" />
+    </LinearLayout>
+
+</LinearLayout>

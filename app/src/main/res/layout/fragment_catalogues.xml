@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomActionCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_horizontal_margin"
+        android:layout_marginBottom="@dimen/screen_vertical_gap"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/bottom_action_corner_radius"
+        app:cardElevation="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/strokeLight"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/generateButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_action_button_height"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/generate_catalogue"
+                android:textAllCaps="false"
+                android:textSize="@dimen/bottom_action_button_text_size"
+                app:backgroundTint="@color/primaryColor"
+                app:cornerRadius="@dimen/input_corner_radius"
+                app:icon="@drawable/ic_price"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/_8sdp"
+                app:iconTint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/satoshi_regular"
+                android:text="@string/credits_usage"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/bottom_action_caption_size" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingHorizontal="@dimen/screen_horizontal_margin"
+        android:paddingTop="@dimen/screen_vertical_gap"
+        android:paddingBottom="@dimen/screen_vertical_gap"
+        app:layout_constraintBottom_toTopOf="@id/bottomActionCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/surface_card_radius"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/strokeLight"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/surface_card_padding_h"
+                    android:paddingTop="@dimen/surface_card_padding_top"
+                    android:paddingBottom="@dimen/surface_card_padding_bottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/create_catalogue_title"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/create_catalogue_subtitle"
+                        android:textColor="@color/ash"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_heading_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/catalogue_for_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                        app:boxStrokeColor="@color/strokeLight"
+                        app:endIconTint="@color/textSecondary"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/catalogueForInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_regular"
+                            android:inputType="none"
+                            android:paddingVertical="@dimen/_2sdp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_12ssp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/category_type_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                        app:boxStrokeColor="@color/strokeLight"
+                        app:endIconTint="@color/textSecondary"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/categoryInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_regular"
+                            android:inputType="none"
+                            android:paddingVertical="@dimen/_2sdp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_12ssp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/outfit_type_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                        app:boxStrokeColor="@color/strokeLight"
+                        app:endIconTint="@color/textSecondary"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/outfitTypeInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_regular"
+                            android:inputType="none"
+                            android:paddingVertical="@dimen/_2sdp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_12ssp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/upload_product_image_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:id="@+id/uploadCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:background="@drawable/bg_upload_dashed"
+                        android:gravity="center"
+                        android:minHeight="@dimen/upload_area_min_height"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/_16sdp"
+                        android:paddingVertical="@dimen/_18sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:contentDescription="@string/upload_product_image_label"
+                            android:src="@drawable/ic_upload"
+                            app:tint="@color/textSecondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/upload_product_title"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/upload_product_subtitle"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/platform_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/platformRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingEnd="@dimen/_4sdp"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_chip_option" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:text="@string/aspect_ratio_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/aspectRatioRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingEnd="@dimen/_4sdp"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_chip_option" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_heading_spacing">
+
+                        <TextView
+                            android:id="@+id/modelHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/model_label"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/modelViewAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/view_all"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/modelRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingEnd="@dimen/_4sdp"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_visual_card" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_heading_spacing">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/background_label"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/backgroundViewAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/view_all"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/backgroundRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingEnd="@dimen/_4sdp"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_visual_card" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_heading_spacing">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/pose_label"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/poseViewAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/view_all"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/_10ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/poseRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingEnd="@dimen/_4sdp"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_visual_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/content_heading_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/business_logo_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/input_corner_radius"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/strokeLight"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/_45sdp"
+                            android:paddingHorizontal="@dimen/_12sdp">
+
+                            <TextView
+                                android:id="@+id/businessLogoValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:maxLines="1"
+                                android:textColor="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="logo.jpg" />
+
+                            <TextView
+                                android:id="@+id/businessLogoBrowse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:text="@string/browse"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="@dimen/_12ssp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/product_code_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                        app:boxStrokeColor="@color/strokeLight"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/productCodeInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:fontFamily="@font/satoshi_regular"
+                            android:paddingVertical="@dimen/_2sdp"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="Saree-556" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

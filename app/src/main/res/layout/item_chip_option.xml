@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/chip_corner_radius"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/strokeLight"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <TextView
+        android:id="@+id/chipLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/satoshi_medium"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/chip_text_size"
+        tools:text="Amazon" />
+
+</com.google.android.material.card.MaterialCardView>

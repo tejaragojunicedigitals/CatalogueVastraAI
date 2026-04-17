@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/studioFragment">
+
+    <fragment
+        android:id="@+id/studioFragment"
+        android:name="com.nice.cataloguevastra.ui.studio.StudioFragment"
+        android:label="@string/bottom_nav_studio" />
+
+    <fragment
+        android:id="@+id/cataloguesFragment"
+        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:label="@string/bottom_nav_catalogues" />
+
+    <fragment
+        android:id="@+id/assetsFragment"
+        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:label="@string/bottom_nav_assets" />
+
+    <fragment
+        android:id="@+id/pricingFragment"
+        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:label="@string/bottom_nav_pricing" />
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:label="@string/bottom_nav_account" />
+
+</navigation>

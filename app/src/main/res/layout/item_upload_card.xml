@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/rail_item_width"
+    android:layout_height="@dimen/rail_item_height"
+    android:layout_marginEnd="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/rail_item_corner_radius"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/strokeLight"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_6sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/ic_upload"
+            app:tint="@color/textSecondary" />
+
+        <TextView
+            android:id="@+id/uploadTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/satoshi_medium"
+            android:gravity="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/rail_item_title_size"
+            tools:text="Upload&#10;Model" />
+
+        <TextView
+            android:id="@+id/uploadSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/satoshi_regular"
+            android:gravity="center"
+            android:textColor="@color/textMuted"
+            android:textSize="@dimen/rail_item_subtitle_size"
+            tools:text="Use your own" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

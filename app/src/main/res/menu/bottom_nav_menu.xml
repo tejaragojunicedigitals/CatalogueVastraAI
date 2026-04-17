@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/studioFragment"
+        android:icon="@drawable/ic_studio"
+        android:title="@string/bottom_nav_studio" />
+    <item
+        android:id="@+id/cataloguesFragment"
+        android:icon="@drawable/ic_catalogues"
+        android:title="@string/bottom_nav_catalogues" />
+    <item
+        android:id="@+id/assetsFragment"
+        android:icon="@drawable/ic_asset"
+        android:title="@string/bottom_nav_assets" />
+    <item
+        android:id="@+id/pricingFragment"
+        android:icon="@drawable/ic_price"
+        android:title="@string/bottom_nav_pricing" />
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_account"
+        android:title="@string/bottom_nav_account" />
+</menu>
