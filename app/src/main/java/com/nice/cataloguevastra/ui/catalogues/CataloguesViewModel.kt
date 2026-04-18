@@ -1,5 +1,6 @@
 package com.nice.cataloguevastra.ui.catalogues
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,12 +50,44 @@ class CataloguesViewModel(
         copy(backgroundRail = backgroundRail.updateVisualSelection(id))
     }
 
+    fun addUploadedModel(uri: Uri, label: String) = updateState {
+        copy(
+            modelRail = modelRail.addUploadedVisual(
+                idPrefix = "uploaded_model",
+                uri = uri,
+                label = label
+            ),
+            modelSelection = modelSelection.copy(
+                selectedModelId = "uploaded_model_${System.currentTimeMillis()}"
+            )
+        ).let { updated ->
+            val selectedId = (updated.modelRail.items.firstOrNull { item ->
+                item is RailItemUiModel.Visual && item.imageUri == uri
+            } as? RailItemUiModel.Visual)?.id ?: updated.modelSelection.selectedModelId
+            updated.copy(modelSelection = updated.modelSelection.copy(selectedModelId = selectedId))
+        }
+    }
+
+    fun addUploadedBackground(uri: Uri, label: String) = updateState {
+        copy(
+            backgroundRail = backgroundRail.addUploadedVisual(
+                idPrefix = "uploaded_background",
+                uri = uri,
+                label = label
+            )
+        )
+    }
+
     fun selectPose(id: String) = updateState {
         copy(poseRail = poseRail.updateVisualSelection(id))
     }
 
     fun updateProductCode(code: String) = updateState {
         copy(productCode = code)
+    }
+
+    fun updateBusinessLogoName(name: String) = updateState {
+        copy(businessLogoName = name)
     }
 
     private inline fun updateState(transform: CatalogueUiState.() -> CatalogueUiState) {
@@ -73,6 +106,31 @@ class CataloguesViewModel(
                     is RailItemUiModel.Upload -> item
                     is RailItemUiModel.Visual -> item.copy(isSelected = item.id == selectedId)
                 }
+            }
+        )
+    }
+
+    private fun RailSectionUiModel.addUploadedVisual(
+        idPrefix: String,
+        uri: Uri,
+        label: String
+    ): RailSectionUiModel {
+        val newId = "${idPrefix}_${System.currentTimeMillis()}"
+        val uploadItem = items.filterIsInstance<RailItemUiModel.Upload>().firstOrNull()
+        val visuals = items.filterIsInstance<RailItemUiModel.Visual>().map { it.copy(isSelected = false) }
+        val uploadedItem = RailItemUiModel.Visual(
+            id = newId,
+            imageRes = 0,
+            imageUri = uri,
+            label = label,
+            isSelected = true
+        )
+
+        return copy(
+            items = buildList {
+                add(uploadedItem)
+                addAll(visuals)
+                if (uploadItem != null) add(uploadItem)
             }
         )
     }

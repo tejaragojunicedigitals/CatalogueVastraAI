@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/satoshi_bold"
             android:text="@string/model_sheet_title"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/sheet_title_size"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,10 +46,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
-            android:fontFamily="@font/satoshi_regular"
+            android:fontFamily="@font/satoshi_medium"
             android:text="@string/model_sheet_subtitle"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/sheet_subtitle_size"
+            android:textColor="@color/soft_gray"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toStartOf="@id/closeButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/modelSheetTitle" />
@@ -62,12 +62,12 @@
         android:layout_marginTop="@dimen/_12sdp"
         app:tabGravity="start"
         app:tabIndicatorColor="@color/primaryColor"
-        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorFullWidth="true"
         app:tabMode="scrollable"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/primaryColor"
         app:tabTextAppearance="@style/TextAppearance.Material3.LabelMedium"
-        app:tabTextColor="@color/textSecondary" />
+        app:tabTextColor="@color/soft_gray" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/libraryFilterRecyclerView"
@@ -101,12 +101,13 @@
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/satoshi_medium"
+            android:fontFamily="@font/satoshi_bold"
             android:text="@string/cancel"
             android:textAllCaps="false"
+            android:textStyle="bold"
             android:textColor="@color/textPrimary" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/applyButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/sheet_button_height"
@@ -114,8 +115,10 @@
             android:fontFamily="@font/satoshi_bold"
             android:text="@string/apply_selection"
             android:textAllCaps="false"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="@color/primaryColor"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@color/white"
+            android:background="@drawable/gradient_bg"
             app:cornerRadius="@dimen/sheet_button_radius" />
     </LinearLayout>
 

@@ -29,18 +29,205 @@
         app:layout_constraintTop_toBottomOf="@id/shellAppBarInclude"
         app:navGraph="@navigation/main_nav_graph" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <LinearLayout
         android:id="@+id/bottom_navigation"
-        style="@style/Widget.CatalogueVastra.BottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconTint="@color/bottom_nav_item_color"
-        app:itemTextColor="@color/bottom_nav_item_color"
-        app:labelVisibilityMode="labeled"
+        android:background="@drawable/bg_bottom_navigation"
+        android:elevation="0dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/studioNavItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <FrameLayout
+                android:id="@+id/studioNavIconContainer"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/bg_bottom_nav_active_icon">
+
+                <ImageView
+                    android:id="@+id/studioNavIcon"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_studio"
+                    app:tint="@color/white" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/studioNavLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/bottom_nav_studio"
+                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cataloguesNavItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <FrameLayout
+                android:id="@+id/cataloguesNavIconContainer"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <ImageView
+                    android:id="@+id/cataloguesNavIcon"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_catalogues"
+                    app:tint="@color/bottomNavInactive" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/cataloguesNavLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/bottom_nav_catalogues"
+                android:textColor="@color/bottomNavInactive"
+                android:textSize="@dimen/_12ssp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/assetsNavItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <FrameLayout
+                android:id="@+id/assetsNavIconContainer"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp">
+
+                <ImageView
+                    android:id="@+id/assetsNavIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_asset"
+                    app:tint="@color/bottomNavInactive" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/assetsNavLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/bottom_nav_assets"
+                android:textColor="@color/bottomNavInactive"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pricingNavItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <FrameLayout
+                android:id="@+id/pricingNavIconContainer"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <ImageView
+                    android:id="@+id/pricingNavIcon"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_price"
+                    app:tint="@color/bottomNavInactive" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/pricingNavLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/bottom_nav_pricing"
+                android:textColor="@color/bottomNavInactive"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountNavItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/_2sdp">
+
+            <FrameLayout
+                android:id="@+id/accountNavIconContainer"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <ImageView
+                    android:id="@+id/accountNavIcon"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_account"
+                    app:tint="@color/bottomNavInactive" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/accountNavLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/bottom_nav_account"
+                android:textColor="@color/bottomNavInactive"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

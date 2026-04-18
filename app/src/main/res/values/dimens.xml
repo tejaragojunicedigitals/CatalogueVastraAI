@@ -76,7 +76,7 @@
     <dimen name="top_bar_padding_h">14dp</dimen>
     <dimen name="top_bar_padding_v">10dp</dimen>
     <dimen name="top_bar_logo_width">92dp</dimen>
-    <dimen name="top_bar_logo_height">20dp</dimen>
+    <dimen name="top_bar_logo_height">24dp</dimen>
     <dimen name="top_bar_icon_size">28dp</dimen>
     <dimen name="top_bar_icon_inner_size">14dp</dimen>
     <dimen name="top_bar_credit_icon_size">16dp</dimen>
@@ -93,22 +93,22 @@
     <dimen name="content_heading_spacing">16dp</dimen>
     <dimen name="section_spacing">14dp</dimen>
     <dimen name="input_corner_radius">14dp</dimen>
-    <dimen name="upload_area_min_height">92dp</dimen>
+    <dimen name="upload_area_min_height">120dp</dimen>
     <dimen name="bottom_action_corner_radius">22dp</dimen>
     <dimen name="bottom_action_button_height">42dp</dimen>
     <dimen name="bottom_action_button_text_size">13sp</dimen>
     <dimen name="bottom_action_caption_size">10sp</dimen>
     <dimen name="chip_corner_radius">10dp</dimen>
-    <dimen name="chip_text_size">10sp</dimen>
-    <dimen name="rail_item_width">68dp</dimen>
-    <dimen name="rail_item_height">82dp</dimen>
+    <dimen name="chip_text_size">14sp</dimen>
+    <dimen name="rail_item_width">92dp</dimen>
+    <dimen name="rail_item_height">92dp</dimen>
     <dimen name="rail_item_corner_radius">14dp</dimen>
-    <dimen name="rail_item_title_size">9sp</dimen>
+    <dimen name="rail_item_title_size">12sp</dimen>
     <dimen name="rail_item_subtitle_size">8sp</dimen>
-    <dimen name="sheet_title_size">16sp</dimen>
+    <dimen name="sheet_title_size">20sp</dimen>
     <dimen name="sheet_subtitle_size">11sp</dimen>
     <dimen name="sheet_grid_height">280dp</dimen>
-    <dimen name="sheet_button_height">38dp</dimen>
+    <dimen name="sheet_button_height">46dp</dimen>
     <dimen name="sheet_button_radius">12dp</dimen>
 
 </resources>

@@ -1,5 +1,7 @@
 package com.nice.cataloguevastra.ui.catalogues.model
 
+import android.net.Uri
+
 data class CatalogueUiState(
     val catalogueForOptions: List<String>,
     val selectedCatalogueFor: String,
@@ -33,6 +35,7 @@ sealed interface RailItemUiModel {
     data class Visual(
         override val id: String,
         val imageRes: Int,
+        val imageUri: Uri? = null,
         val label: String,
         val isSelected: Boolean
     ) : RailItemUiModel

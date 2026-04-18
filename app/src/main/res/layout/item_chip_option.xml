@@ -18,8 +18,8 @@
         android:fontFamily="@font/satoshi_medium"
         android:paddingHorizontal="@dimen/_12sdp"
         android:paddingVertical="@dimen/_8sdp"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/chip_text_size"
+        android:textColor="@color/ash"
+        android:textSize="@dimen/_14ssp"
         tools:text="Amazon" />
 
 </com.google.android.material.card.MaterialCardView>

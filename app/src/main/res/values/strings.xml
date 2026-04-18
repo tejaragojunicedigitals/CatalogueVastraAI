@@ -41,11 +41,25 @@
     <string name="view_all_background_message">Background library can be expanded once the background API or local asset source is ready.</string>
     <string name="view_all_pose_message">Pose library can be expanded once the pose feed is connected.</string>
     <string name="background_upload_message">Background upload is stubbed with dummy data for now.</string>
+    <string name="upload_product_selected_caption">Image selected and ready to use</string>
+    <string name="model_upload_selected_message">Selected model image: %1$s</string>
+    <string name="background_upload_selected_message">Selected background image: %1$s</string>
+    <string name="selected_image_fallback_name">Selected image</string>
     <string name="model_sheet_title">Select Model</string>
     <string name="model_sheet_subtitle">Choose from our curated library or manage your own models.</string>
     <string name="cancel">Cancel</string>
     <string name="apply_selection">Apply Selection</string>
+    <string name="generated_catalogue_title">Saree-556</string>
+    <string name="generated_back">Back</string>
+    <string name="download_all">Download All</string>
+    <string name="generated_brand">VivaVastra</string>
+    <string name="generated_front_view">Front View</string>
+    <string name="download_all_message">Download all can be connected to export flow next.</string>
+    <string name="download_image_message">Single image download can be connected next.</string>
+    <string name="expand_preview_message">Full-screen preview can be connected next.</string>
     <string name="top_bar_logo">AI Vastra</string>
     <string name="support_icon">Support</string>
     <string name="credits_icon">Credits</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

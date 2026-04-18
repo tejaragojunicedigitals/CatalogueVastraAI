@@ -19,5 +19,30 @@
         <item name="android:textSize">@dimen/bottom_nav_text_size</item>
     </style>
 
+    <style name="Widget.CatalogueVastra.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="endIconTint">@color/textSecondary</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="Widget.CatalogueVastra.DropdownField" parent="Widget.Material3.AutoCompleteTextView.OutlinedBox">
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">@font/satoshi_regular</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minHeight">@dimen/_45sdp</item>
+        <item name="android:popupBackground">@drawable/bg_dropdown_popup</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:dropDownVerticalOffset">@dimen/_8sdp</item>
+    </style>
+
     <style name="Theme.CatalogueVastra" parent="Base.Theme.CatalogueVastra" />
 </resources>

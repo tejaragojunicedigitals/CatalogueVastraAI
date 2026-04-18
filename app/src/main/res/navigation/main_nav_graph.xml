@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/studioFragment"
-        android:name="com.nice.cataloguevastra.ui.studio.StudioFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.StudioFragment"
         android:label="@string/bottom_nav_studio" />
 
     <fragment
@@ -28,5 +28,10 @@
         android:id="@+id/accountFragment"
         android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
         android:label="@string/bottom_nav_account" />
+
+    <fragment
+        android:id="@+id/generatedCatalogueFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.GeneratedCatalogueFragment"
+        android:label="@string/generated_catalogue_title" />
 
 </navigation>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#1A141F</color>
+    <color name="black">#1F1F1F</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#8B1EAE</color>
+    <color name="primaryColor">#5B3DF5</color>
     <color name="grey">#E5E7EB</color>
     <color name="light_black">#666269</color>
     <color name="red">#BC0E30</color>
@@ -11,7 +11,7 @@
     <color name="dark_grey">#969398</color>
     <color name="ash">#6B7280</color>
     <color name="richbrownorange">#7C2D12</color>
-    <color name="soft_gray">#B1AFB0</color>
+    <color name="soft_gray">#7C7C7E</color>
     <color name="light_purple">#DBB9E6</color>
     <color name="perfume_haze">#F3E9F7</color>
     <color name="lavender">#F3E9F7</color>
@@ -31,7 +31,7 @@
     <color name="placeholderArchBottom">#C69B78</color>
     <color name="placeholderWindowTop">#D9D2CC</color>
     <color name="placeholderWindowBottom">#8E8278</color>
-    <color name="bottomNavInactive">#8B8195</color>
+    <color name="bottomNavInactive">#374151</color>
     <color name="dividerLight">#F1EAF5</color>
 
     <color name="lightyellow">#FFF0CC</color>

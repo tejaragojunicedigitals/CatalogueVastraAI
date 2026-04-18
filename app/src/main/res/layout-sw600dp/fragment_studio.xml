@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomActionCard"
@@ -106,110 +106,135 @@
                         android:layout_marginTop="@dimen/_4sdp"
                         android:fontFamily="@font/satoshi_medium"
                         android:text="@string/create_catalogue_subtitle"
-                        android:textColor="@color/ash"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/content_heading_spacing"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/catalogue_for_label"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp" />
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
-                        app:boxStrokeColor="@color/strokeLight"
-                        app:endIconTint="@color/textSecondary"
-                        app:hintEnabled="false">
-
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/catalogueForInput"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_regular"
-                            android:inputType="none"
-                            android:paddingVertical="@dimen/_2sdp"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/_12ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/section_spacing"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/category_type_label"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/catalogue_for_label"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
-                        app:boxStrokeColor="@color/strokeLight"
-                        app:endIconTint="@color/textSecondary"
-                        app:hintEnabled="false">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/catalogueForInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:background="@drawable/et_bg"
+                                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                                android:drawablePadding="@dimen/_8sdp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:gravity="center_vertical"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:paddingLeft="@dimen/_12sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp"
+                                app:drawableTint="@color/textSecondary" />
+                        </LinearLayout>
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/categoryInput"
-                            android:layout_width="match_parent"
+                        <Space
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_regular"
-                            android:inputType="none"
-                            android:paddingVertical="@dimen/_2sdp"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/_12ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/section_spacing"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/outfit_type_label"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/category_type_label"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
-                        app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
-                        app:boxStrokeColor="@color/strokeLight"
-                        app:endIconTint="@color/textSecondary"
-                        app:hintEnabled="false">
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/categoryInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:background="@drawable/et_bg"
+                                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                                android:drawablePadding="@dimen/_8sdp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:gravity="center_vertical"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:paddingLeft="@dimen/_12sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp"
+                                app:drawableTint="@color/textSecondary" />
+                        </LinearLayout>
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/outfitTypeInput"
-                            android:layout_width="match_parent"
+                        <Space
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_regular"
-                            android:inputType="none"
-                            android:paddingVertical="@dimen/_2sdp"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/_12ssp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/outfit_type_label"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/outfitTypeInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:background="@drawable/et_bg"
+                                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                                android:drawablePadding="@dimen/_8sdp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/satoshi_regular"
+                                android:gravity="center_vertical"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:paddingLeft="@dimen/_12sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingRight="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp"
+                                app:drawableTint="@color/textSecondary" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -233,6 +258,18 @@
                         android:paddingVertical="@dimen/_18sdp">
 
                         <ImageView
+                            android:id="@+id/uploadProductPreview"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_120sdp"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/upload_product_image_label"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            tools:src="@drawable/model_img"
+                            tools:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/uploadProductIcon"
                             android:layout_width="@dimen/_18sdp"
                             android:layout_height="@dimen/_18sdp"
                             android:contentDescription="@string/upload_product_image_label"
@@ -240,6 +277,7 @@
                             app:tint="@color/textSecondary" />
 
                         <TextView
+                            android:id="@+id/uploadProductTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
@@ -249,6 +287,7 @@
                             android:textSize="@dimen/_14ssp" />
 
                         <TextView
+                            android:id="@+id/uploadProductSubtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
@@ -319,10 +358,10 @@
                             android:id="@+id/modelViewAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_medium"
+                            android:fontFamily="@font/satoshi_bold"
                             android:text="@string/view_all"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -359,10 +398,10 @@
                             android:id="@+id/backgroundViewAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_medium"
+                            android:fontFamily="@font/satoshi_bold"
                             android:text="@string/view_all"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -399,10 +438,10 @@
                             android:id="@+id/poseViewAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_medium"
+                            android:fontFamily="@font/satoshi_bold"
                             android:text="@string/view_all"
-                            android:textColor="@color/primaryColor"
-                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -503,8 +542,9 @@
                             android:paddingVertical="@dimen/_2sdp"
                             android:textColor="@color/textPrimary"
                             android:textSize="@dimen/_12ssp"
-                            tools:text="Saree-556" />
+                            tools:hint="Saree-556" />
                     </com.google.android.material.textfield.TextInputLayout>
+
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

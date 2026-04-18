@@ -21,21 +21,9 @@
             android:id="@+id/modelImage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/rail_item_height"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:src="@drawable/model_img" />
 
-        <TextView
-            android:id="@+id/modelName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:ellipsize="end"
-            android:fontFamily="@font/satoshi_medium"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/chip_text_size"
-            tools:text="Riya" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

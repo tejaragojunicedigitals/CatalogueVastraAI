@@ -29,22 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:fontFamily="@font/satoshi_medium"
+            android:fontFamily="@font/satoshi_bold"
             android:gravity="center"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/ash"
             android:textSize="@dimen/rail_item_title_size"
             tools:text="Upload&#10;Model" />
 
-        <TextView
-            android:id="@+id/uploadSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:fontFamily="@font/satoshi_regular"
-            android:gravity="center"
-            android:textColor="@color/textMuted"
-            android:textSize="@dimen/rail_item_subtitle_size"
-            tools:text="Use your own" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -52,7 +52,11 @@ class ImageRailAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RailItemUiModel.Visual) = with(binding) {
-            previewImage.setImageResource(item.imageRes)
+            if (item.imageUri != null) {
+                previewImage.setImageURI(item.imageUri)
+            } else {
+                previewImage.setImageResource(item.imageRes)
+            }
             previewCard.updateSelection(item.isSelected)
             root.setOnClickListener { onVisualClicked(item) }
         }
@@ -77,7 +81,6 @@ class ImageRailAdapter(
 
         fun bind(item: RailItemUiModel.Upload) = with(binding) {
             uploadTitle.text = item.title
-            uploadSubtitle.text = item.subtitle
             root.setOnClickListener { onUploadClicked(item) }
         }
     }

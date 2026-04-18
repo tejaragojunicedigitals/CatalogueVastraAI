@@ -35,7 +35,7 @@ class SelectionGridAdapter(
 
         fun bind(item: ModelSheetItemUiModel) = with(binding) {
             modelImage.setImageResource(item.imageRes)
-            modelName.text = item.label
+//            modelName.text = item.label
             root.updateSelection(item.isSelected)
             root.setOnClickListener { onModelClicked(item) }
         }
