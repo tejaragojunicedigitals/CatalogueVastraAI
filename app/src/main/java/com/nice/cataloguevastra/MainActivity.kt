@@ -1,5 +1,6 @@
 package com.nice.cataloguevastra
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -16,6 +17,7 @@ import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
+import com.nice.cataloguevastra.ui.activities.LoginActivity
 import com.nice.cataloguevastra.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!(application as CatalogueVastraApp).appContainer.sessionManager.hasToken()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
                 ContextCompat.getColor(this, R.color.white),
@@ -125,7 +132,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateBottomNavigationSelection(destinationId: Int) {
         val activeDestinationId = when (destinationId) {
-            R.id.generatedCatalogueFragment -> R.id.studioFragment
+            R.id.generatedCatalogueFragment -> R.id.cataloguesFragment
+            R.id.updatePasswordFragment -> R.id.accountFragment
             else -> destinationId
         }
         val selectedIconColor = ContextCompat.getColor(this, R.color.white)

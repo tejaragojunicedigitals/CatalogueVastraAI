@@ -1,5 +1,6 @@
 package com.nice.cataloguevastra.ui.fragments
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +9,18 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.nice.cataloguevastra.CatalogueVastraApp
 import com.nice.cataloguevastra.R
 import com.nice.cataloguevastra.databinding.FragmentStudioBinding
-import com.nice.cataloguevastra.ui.catalogues.CataloguesViewModel
-import com.nice.cataloguevastra.ui.catalogues.ModelSelectionBottomSheet
-import com.nice.cataloguevastra.ui.catalogues.adapter.ImageRailAdapter
-import com.nice.cataloguevastra.ui.catalogues.adapter.SelectableChipAdapter
-import com.nice.cataloguevastra.ui.catalogues.model.CatalogueUiState
+import com.nice.cataloguevastra.ui.activities.LoginActivity
+import com.nice.cataloguevastra.viewmodel.CataloguesViewModel
+import com.nice.cataloguevastra.adapters.ImageRailAdapter
+import com.nice.cataloguevastra.adapters.SelectableChipAdapter
+import com.nice.cataloguevastra.model.CatalogueUiState
 import com.nice.cataloguevastra.utils.ImagePickerManager
+import com.nice.cataloguevastra.viewmodel.CataloguesViewModel.Companion.DROPDOWN_PLACEHOLDER
 
 class StudioFragment : Fragment() {
 
@@ -29,7 +31,9 @@ class StudioFragment : Fragment() {
     private var selectedProductImageUri: Uri? = null
 
     private val viewModel: CataloguesViewModel by activityViewModels {
-        CataloguesViewModel.Companion.factory()
+        CataloguesViewModel.factory(
+            (requireActivity().application as CatalogueVastraApp).appContainer.catalogueRepository
+        )
     }
 
     private val platformAdapter = SelectableChipAdapter { chip ->
@@ -70,7 +74,20 @@ class StudioFragment : Fragment() {
         setupRecyclerViews()
         setupInteractions()
         observeUiState()
+        observeMessages()
+        viewModel.ensureInitialStudioData()
+        setupLogin()
     }
+
+    fun setupLogin() {
+        binding.generateBtn?.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
+
 
     private fun setupRecyclerViews() = with(binding) {
         platformRecyclerView.layoutManager = LinearLayoutManager(
@@ -115,7 +132,13 @@ class StudioFragment : Fragment() {
             val value = catalogueForInput.adapter.getItem(position).toString()
             viewModel.updateCatalogueFor(value)
         }
-        categoryInput.setOnClickListener { categoryInput.showDropDown() }
+        categoryInput.setOnClickListener {
+            if (categoryInput.adapter != null && categoryInput.adapter.count > 0) {
+                categoryInput.showDropDown()
+            } else {
+                showDummyMessage(getString(R.string.select_catalogue_for_first))
+            }
+        }
         categoryInput.setOnItemClickListener { _, _, position, _ ->
             val value = categoryInput.adapter.getItem(position).toString()
             viewModel.updateCategory(value)
@@ -137,7 +160,7 @@ class StudioFragment : Fragment() {
         poseViewAll.setOnClickListener {
             showDummyMessage(getString(R.string.view_all_pose_message))
         }
-        businessLogoBrowse.setOnClickListener {
+        businessLogoBrowse?.setOnClickListener {
             openImagePickerFor(UploadTarget.BUSINESS_LOGO)
         }
         uploadCard.setOnClickListener {
@@ -150,35 +173,48 @@ class StudioFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, ::render)
     }
 
-    private fun render(state: CatalogueUiState) = with(binding) {
-        if (catalogueForInput.adapter == null) {
-            catalogueForInput.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.item_dropdown_option,
-                    state.catalogueForOptions
-                )
-            )
-            categoryInput.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.item_dropdown_option,
-                    state.categoryOptions
-                )
-            )
-            outfitTypeInput.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.item_dropdown_option,
-                    state.outfitTypeOptions
-                )
-            )
+    private fun observeMessages() {
+        viewModel.message.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrBlank()) {
+                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+                viewModel.consumeMessage()
+            }
         }
+    }
+
+    private fun render(state: CatalogueUiState) = with(binding) {
+        catalogueForInput.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown_option,
+                state.catalogueForOptions
+            )
+        )
+        categoryInput.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown_option,
+                state.categoryOptions
+            )
+        )
+        outfitTypeInput.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown_option,
+                state.outfitTypeOptions
+            )
+        )
 
         catalogueForInput.setText(state.selectedCatalogueFor, false)
         categoryInput.setText(state.selectedCategory, false)
         outfitTypeInput.setText(state.selectedOutfitType, false)
-        businessLogoValue.text = state.businessLogoName
+        val hasCategoryOptions = state.categoryOptions.isNotEmpty()
+        categoryInput.isEnabled = hasCategoryOptions
+        categoryInput.alpha = if (hasCategoryOptions) 1f else 0.65f
+        if (!hasCategoryOptions && state.selectedCategory != DROPDOWN_PLACEHOLDER) {
+            categoryInput.setText(DROPDOWN_PLACEHOLDER, false)
+        }
+        businessLogoValue?.text = state.businessLogoName
         if (productCodeInput.text?.toString() != state.productCode) {
             productCodeInput.setText(state.productCode)
             productCodeInput.setSelection(state.productCode.length)
@@ -207,10 +243,10 @@ class StudioFragment : Fragment() {
                 renderProductUploadCard()
             }
             UploadTarget.MODEL -> {
-                viewModel.addUploadedModel(uri, fileName)
+                viewModel.uploadPickedModel(uri, fileName)
             }
             UploadTarget.BACKGROUND -> {
-                viewModel.addUploadedBackground(uri, fileName)
+                viewModel.uploadPickedBackground(uri, fileName)
             }
             UploadTarget.BUSINESS_LOGO -> {
                 viewModel.updateBusinessLogoName(fileName)

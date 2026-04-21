@@ -92,7 +92,7 @@
     <dimen name="chip_corner_radius">10dp</dimen>
     <dimen name="chip_text_size">10sp</dimen>
     <dimen name="rail_item_width">150dp</dimen>
-    <dimen name="rail_item_height">115dp</dimen>
+    <dimen name="rail_item_height">120dp</dimen>
     <dimen name="rail_item_corner_radius">15dp</dimen>
     <dimen name="rail_item_title_size">12sp</dimen>
     <dimen name="rail_item_subtitle_size">8sp</dimen>

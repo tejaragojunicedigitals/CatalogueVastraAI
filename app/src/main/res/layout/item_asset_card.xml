@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/assetCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_6sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_16sdp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/strokeLight"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_6sdp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/previewImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/placeholder_bg_window"
+                android:scaleType="fitXY"
+                tools:src="@drawable/model_img" />
+
+            <ImageView
+                android:id="@+id/selectionIcon"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="top|start"
+                android:layout_margin="@dimen/_8sdp"
+                android:contentDescription="@string/assets_select_asset"
+                android:src="@drawable/ic_catalogue_select_unchecked" />
+
+            <LinearLayout
+                android:id="@+id/thumbnailStrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/assetTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/satoshi_medium"
+            android:maxLines="1"
+            android:textColor="@color/bottomNavInactive"
+            android:textSize="@dimen/_14ssp"
+            tools:text="Womens_garden_21/02/26" />
+
+        <TextView
+            android:id="@+id/assetSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/satoshi_medium"
+            android:textColor="@color/ash"
+            android:textSize="@dimen/_12ssp"
+            tools:text="4 Images" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

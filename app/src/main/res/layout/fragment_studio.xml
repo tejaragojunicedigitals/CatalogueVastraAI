@@ -64,9 +64,10 @@
         android:paddingHorizontal="@dimen/screen_horizontal_margin"
         android:paddingTop="@dimen/screen_vertical_gap"
         android:paddingBottom="@dimen/screen_vertical_gap"
-        app:layout_constraintBottom_toTopOf="@id/bottomActionCard"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -97,8 +98,8 @@
                         android:fontFamily="@font/satoshi_bold"
                         android:text="@string/create_catalogue_title"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_20ssp" />
+                        android:textSize="@dimen/_20ssp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -116,8 +117,8 @@
                         android:fontFamily="@font/satoshi_bold"
                         android:text="@string/catalogue_for_label"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/catalogueForInput"
@@ -148,8 +149,8 @@
                         android:fontFamily="@font/satoshi_bold"
                         android:text="@string/category_type_label"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/categoryInput"
@@ -181,7 +182,7 @@
                         android:text="@string/outfit_type_label"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/outfitTypeInput"
@@ -213,7 +214,7 @@
                         android:text="@string/upload_product_image_label"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/uploadCard"
@@ -275,7 +276,7 @@
                         android:text="@string/platform_label"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/platformRecyclerView"
@@ -296,7 +297,7 @@
                         android:text="@string/aspect_ratio_label"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/aspectRatioRecyclerView"
@@ -436,60 +437,60 @@
                         tools:itemCount="4"
                         tools:listitem="@layout/item_visual_card" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/content_heading_spacing"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/business_logo_label"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/content_heading_spacing"-->
+<!--                        android:fontFamily="@font/satoshi_bold"-->
+<!--                        android:text="@string/business_logo_label"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_14ssp"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/input_corner_radius"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/strokeLight"
-                        app:strokeWidth="@dimen/_1sdp">
+<!--                    <com.google.android.material.card.MaterialCardView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_6sdp"-->
+<!--                        app:cardBackgroundColor="@color/white"-->
+<!--                        app:cardCornerRadius="@dimen/input_corner_radius"-->
+<!--                        app:cardElevation="0dp"-->
+<!--                        app:strokeColor="@color/strokeLight"-->
+<!--                        app:strokeWidth="@dimen/_1sdp">-->
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/_45sdp"
-                            android:paddingHorizontal="@dimen/_12sdp">
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:minHeight="@dimen/_45sdp"-->
+<!--                            android:paddingHorizontal="@dimen/_12sdp">-->
 
-                            <TextView
-                                android:id="@+id/businessLogoValue"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/satoshi_regular"
-                                android:maxLines="1"
-                                android:textColor="@color/textSecondary"
-                                android:textSize="@dimen/_12ssp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:text="logo.jpg" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/businessLogoValue"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:ellipsize="end"-->
+<!--                                android:fontFamily="@font/satoshi_regular"-->
+<!--                                android:maxLines="1"-->
+<!--                                android:textColor="@color/textSecondary"-->
+<!--                                android:textSize="@dimen/_12ssp"-->
+<!--                                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                tools:text="logo.jpg" />-->
 
-                            <TextView
-                                android:id="@+id/businessLogoBrowse"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/satoshi_medium"
-                                android:text="@string/browse"
-                                android:textColor="@color/primaryColor"
-                                android:textSize="@dimen/_12ssp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </com.google.android.material.card.MaterialCardView>
+<!--                            <TextView-->
+<!--                                android:id="@+id/businessLogoBrowse"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/satoshi_medium"-->
+<!--                                android:text="@string/browse"-->
+<!--                                android:textColor="@color/primaryColor"-->
+<!--                                android:textSize="@dimen/_12ssp"-->
+<!--                                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" />-->
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                    </com.google.android.material.card.MaterialCardView>-->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -499,7 +500,7 @@
                         android:text="@string/product_code_label"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -527,22 +528,60 @@
 
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/generateButton"
+                        android:id="@+id/generate_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Generate Catalogue"
-
-                        app:icon="@drawable/ic_generate_catalog"
-                        app:iconGravity="textStart"
-                        app:iconPadding="8dp"
-
-                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_14sdp"
 
                         android:background="@drawable/gradient_bg"
-                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="Generate Catalogue"
+
                         android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16ssp"
+                        app:icon="@drawable/ic_generate_catalog"
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        android:layout_marginTop="@dimen/_14sdp"/>
+                        android:fontFamily="@font/satoshi_bold"
+
+
+                        />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="credits"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" (HD: 25 per images x 0 pose)"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"/>
+
+                    </LinearLayout>
 
 
                 </LinearLayout>

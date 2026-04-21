@@ -1,14 +1,365 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.fragments.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingHorizontal="@dimen/screen_horizontal_margin"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_120sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="720dp">
+
+                <TextView
+                    android:id="@+id/back_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/account_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_24ssp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:text="@string/account_subtitle"
+                    android:textColor="@color/ash"
+                    android:textSize="@dimen/_14ssp" />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/profileImage"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_120sdp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_profile"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/CircleImage" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_32sdp"
+                                android:layout_height="@dimen/_32sdp"
+                                android:padding="@dimen/_6sdp"
+                                android:src="@drawable/cam_ic"
+                                app:layout_constraintBottom_toBottomOf="@id/profileImage"
+                                app:layout_constraintEnd_toEndOf="@id/profileImage" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/account_picture_hint"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_18sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/strokeLight"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_details_title"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_16ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_full_name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <EditText
+                            android:id="@+id/full_name_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:hint="@string/account_full_name"
+                            android:paddingHorizontal="@dimen/_12sdp"
+                            android:text="John Doe"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_business_name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <EditText
+                            android:id="@+id/business_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:hint="@string/account_business_name"
+                            android:paddingHorizontal="@dimen/_12sdp"
+                            android:text="Fashion Space"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_email_address"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <EditText
+                            android:id="@+id/email_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:hint="@string/account_email_address"
+                            android:paddingHorizontal="@dimen/_12sdp"
+                            android:text="johndoe@email.com"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_mobile_number"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <EditText
+                            android:id="@+id/mobile_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:background="@drawable/et_bg"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:hint="@string/account_mobile_number"
+                            android:paddingHorizontal="@dimen/_12sdp"
+                            android:text="968234711"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_18sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/strokeLight"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_branding_title"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_16ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/account_branding_subtitle"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/business_logo_label"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/input_corner_radius"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/strokeLight"
+                            app:strokeWidth="@dimen/_1sdp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="@dimen/_48sdp"
+                                android:paddingHorizontal="@dimen/_12sdp">
+
+                                <TextView
+                                    android:id="@+id/businessLogoValue"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/satoshi_regular"
+                                    android:maxLines="1"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_12ssp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:text="logo.jpg" />
+
+                                <TextView
+                                    android:id="@+id/businessLogoBrowse"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:text="@string/browse"
+                                    android:textColor="@color/primaryColor"
+                                    android:textSize="@dimen/_12ssp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/cancel_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:text="@string/account_cancel"
+                                android:textAllCaps="false"
+                                android:textColor="@color/bottomNavInactive"
+                                android:textSize="@dimen/_14ssp"
+                                app:backgroundTint="@color/white"
+                                app:cornerRadius="@dimen/input_corner_radius"
+                                app:strokeColor="@color/grey"
+                                app:strokeWidth="@dimen/_1sdp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/save_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:text="@string/account_save_changes"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp"
+                                app:backgroundTint="@color/primaryColor"
+                                app:cornerRadius="@dimen/input_corner_radius" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createNewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:elevation="@dimen/_6sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:paddingHorizontal="@dimen/_18sdp"
+        android:text="@string/account_update_password"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        android:background="@drawable/gradient_bg"
+        app:cornerRadius="@dimen/_24sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

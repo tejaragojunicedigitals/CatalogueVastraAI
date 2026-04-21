@@ -11,23 +11,28 @@
 
     <fragment
         android:id="@+id/cataloguesFragment"
-        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.CatalogueFragment"
         android:label="@string/bottom_nav_catalogues" />
 
     <fragment
         android:id="@+id/assetsFragment"
-        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.AssetsFragment"
         android:label="@string/bottom_nav_assets" />
 
     <fragment
         android:id="@+id/pricingFragment"
-        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.PricingFragment"
         android:label="@string/bottom_nav_pricing" />
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.nice.cataloguevastra.ui.common.PlaceholderFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.AccountFragment"
         android:label="@string/bottom_nav_account" />
+
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.UpdatePasswordFragment"
+        android:label="@string/update_password_title" />
 
     <fragment
         android:id="@+id/generatedCatalogueFragment"

@@ -1,10 +1,42 @@
 <resources>
     <string name="app_name">CatalogueVastra</string>
+    <string name="login_title">Sign in</string>
+    <string name="login_subtitle">Access your catalogue workspace with your username and password.</string>
+    <string name="login_username_label">Username</string>
+    <string name="login_username_hint">Enter your username</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_password_hint">Enter your password</string>
+    <string name="login_button">Sign In</string>
+    <string name="login_signup_prompt">Don’t have an account?</string>
+    <string name="login_signup_cta">Sign up</string>
+    <string name="signup_title">Create account</string>
+    <string name="signup_subtitle">Create your seller account and upload your profile and branding in one flow.</string>
+    <string name="signup_profile_image_label">Profile picture</string>
+    <string name="signup_profile_image_hint">Optional profile image</string>
+    <string name="signup_no_profile_image">No profile image selected</string>
+    <string name="signup_business_logo_label">Business logo</string>
+    <string name="signup_business_logo_hint">Optional brand logo</string>
+    <string name="signup_no_business_logo">No business logo selected</string>
+    <string name="signup_upload_button">Upload</string>
+    <string name="signup_username_label">Username</string>
+    <string name="signup_username_hint">Choose a username</string>
+    <string name="signup_business_name_label">Business name</string>
+    <string name="signup_business_name_hint">Enter your business name</string>
+    <string name="signup_email_label">Email address</string>
+    <string name="signup_email_hint">Enter your email address</string>
+    <string name="signup_phone_label">Mobile number</string>
+    <string name="signup_phone_hint">Enter your mobile number</string>
+    <string name="signup_password_label">Password</string>
+    <string name="signup_password_hint">Create a password</string>
+    <string name="signup_button">Create account</string>
+    <string name="signup_signin_prompt">Already have an account?</string>
+    <string name="signup_signin_cta">Sign in</string>
     <string name="credits_text">60 Credits Left</string>
     <string name="create_catalogue_title">Create Your Catalogue</string>
     <string name="create_catalogue_subtitle">Prepare your product and styling before generating.</string>
     <string name="catalogue_for_label">Catalogue For</string>
     <string name="category_type_label">Category Type</string>
+    <string name="select_catalogue_for_first">Select catalogue for first</string>
     <string name="outfit_type_label">Select Outfit Type</string>
     <string name="upload_product_image_label">Upload Product Image</string>
     <string name="upload_product_title">Drag &amp; drop or click to browse</string>
@@ -62,4 +94,192 @@
     <string name="credits_icon">Credits</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <string name="view_manage_and_download_your_previously_generated_catalogues_images">View, manage, and download your previously generated catalogues images</string>
+    <string name="catalogues_title">Your Catalogues</string>
+    <string name="catalogues_create_new">Create New</string>
+    <string name="catalogues_search_hint">Search Catalogues</string>
+    <string name="catalogues_filter_date">Date</string>
+    <string name="catalogues_filter_category">Category</string>
+    <string name="catalogues_filter_platform">Platform</string>
+    <string name="catalogues_filter_menu">Open filters</string>
+    <string name="catalogues_grid_view">Grid View</string>
+    <string name="catalogues_select_all">Select All</string>
+    <string name="catalogues_clear_selection">Clear Selection</string>
+    <string name="catalogues_download_selected">Download Selected</string>
+    <string name="catalogues_empty_state">No catalogues match your current search or filters.</string>
+    <string name="catalogues_grid_message">Grid view is active on this screen.</string>
+    <string name="catalogues_download_select_prompt">Select at least one catalogue to download.</string>
+    <string name="catalogues_download_selected_message">%1$d catalogues are ready for download.</string>
+    <string name="catalogues_download_all_message">%1$d visible catalogues are ready for download.</string>
+    <string name="catalogues_deleted_message">%1$s removed from your catalogue list.</string>
+    <string name="catalogues_delete">Delete catalogue</string>
+    <string name="catalogues_date_today">Today</string>
+    <string name="catalogues_date_this_week">This Week</string>
+    <string name="catalogues_date_this_month">This Month</string>
+    <string name="catalogues_category_womens">Women\'s</string>
+    <string name="catalogues_category_mens">Men\'s</string>
+    <string name="catalogues_category_boys">Boy\'s</string>
+    <string name="catalogues_category_girls">Girl\'s</string>
+    <string name="catalogues_platform_amazon">Amazon</string>
+    <string name="catalogues_platform_flipkart">Flipkart</string>
+    <string name="catalogues_platform_myntra">Myntra</string>
+    <string name="catalogues_platform_shopify">Shopify</string>
+    <string name="catalogues_platform_meesho">Meesho</string>
+    <string name="your_assets">Your Assets</string>
+    <string name="manage_your_uploaded_products_models_and_backgrounds">Manage your uploaded products, models, and backgrounds.</string>
+    <string name="assets_upload_asset">Upload Asset</string>
+    <string name="assets_upload_date">Upload Date</string>
+    <string name="assets_sort_latest">Latest First</string>
+    <string name="assets_sort_oldest">Oldest First</string>
+    <string name="assets_empty_state">No assets are available in this tab yet.</string>
+    <string name="assets_select_asset">Select asset</string>
+    <string name="assets_upload_message">Upload asset can be connected to the file picker next.</string>
+    <string name="assets_open_asset_message">Opening %1$s.</string>
+    <string name="pricing_title">Simple pricing for catalogue-ready visuals</string>
+    <string name="pricing_subtitle">Create professional fashion catalogues without photoshoots, models, or editing headaches.</string>
+    <string name="pricing_credits_value">Your credits: %1$d</string>
+    <string name="pricing_credit_note">1 credit = 1 generated image. Paid packs are added after admin approval.</string>
+    <string name="pricing_packs_title">Credit packs</string>
+    <string name="pricing_packs_subtitle">Choose a pack that fits your catalogue volume. Credits are consumed per image based on output quality.</string>
+    <string name="pricing_pack_snapshot">Pack snapshot</string>
+    <string name="pricing_output_title">Approx. image output by tier</string>
+    <string name="pricing_features_title">Features</string>
+    <string name="pricing_history_title">Recent credit additions</string>
+    <string name="pricing_history_empty">No recent credit additions yet.</string>
+    <string name="pricing_view_details">View details</string>
+    <string name="pricing_hide_details">Hide details</string>
+    <string name="pricing_current_plan">Current Plan</string>
+    <string name="pricing_upgrade_plan">Upgrade Plan</string>
+    <string name="pricing_best_value">Best value</string>
+    <string name="pricing_plan_free">Free</string>
+    <string name="pricing_plan_free_subtitle">First-time users trying AI Vastra</string>
+    <string name="pricing_plan_starter">Starter Pack</string>
+    <string name="pricing_plan_starter_subtitle">Small sellers and boutique stores</string>
+    <string name="pricing_plan_growth">Growth Pack</string>
+    <string name="pricing_plan_growth_subtitle">Brands and growing businesses</string>
+    <string name="pricing_plan_pro">Pro Pack</string>
+    <string name="pricing_plan_pro_subtitle">Large teams and agencies</string>
+    <string name="pricing_price_free">₹0</string>
+    <string name="pricing_price_starter">₹2,500</string>
+    <string name="pricing_price_growth">₹5,000</string>
+    <string name="pricing_price_pro">₹10,000</string>
+    <string name="pricing_credits_line_free">5 credits (welcome)</string>
+    <string name="pricing_credits_line_starter">/ 2,500 credits</string>
+    <string name="pricing_credits_line_growth">/ 5,000 credits</string>
+    <string name="pricing_credits_line_pro">/ 10,000 credits</string>
+    <string name="pricing_snapshot_free_credits">5 welcome credits (one-time)</string>
+    <string name="pricing_snapshot_paid_unlock">Paid packs unlock all premium features</string>
+    <string name="pricing_snapshot_credits_2500">2,500 credits</string>
+    <string name="pricing_snapshot_price_2500">Price (₹): 2,500</string>
+    <string name="pricing_snapshot_credits_5000">5,000 credits</string>
+    <string name="pricing_snapshot_price_5000">Price (₹): 5,000</string>
+    <string name="pricing_snapshot_credits_10000">10,000 credits</string>
+    <string name="pricing_snapshot_price_10000">Price (₹): 10,000</string>
+    <string name="pricing_highlight_free_credits">Welcome starter credits included</string>
+    <string name="pricing_highlight_free_quality">HD, 2K and 4K quality supported</string>
+    <string name="pricing_highlight_hd_100">Up to 100 HD images</string>
+    <string name="pricing_highlight_hd_200">Up to 200 HD images</string>
+    <string name="pricing_highlight_hd_400">Up to 400 HD images</string>
+    <string name="pricing_output_free_hd">HD: 25 credits per image</string>
+    <string name="pricing_output_free_2k">2K: 35 credits per image</string>
+    <string name="pricing_output_free_4k">4K: 40 credits per image</string>
+    <string name="pricing_output_hd_100">HD (25 cr): ~100 images</string>
+    <string name="pricing_output_2k_71">2K (35 cr): ~71 images</string>
+    <string name="pricing_output_4k_62">4K (40 cr): ~62 images</string>
+    <string name="pricing_output_hd_200">HD (25 cr): ~200 images</string>
+    <string name="pricing_output_2k_142">2K (35 cr): ~142 images</string>
+    <string name="pricing_output_4k_125">4K (40 cr): ~125 images</string>
+    <string name="pricing_output_hd_400">HD (25 cr): ~400 images</string>
+    <string name="pricing_output_2k_285">2K (35 cr): ~285 images</string>
+    <string name="pricing_output_4k_250">4K (40 cr): ~250 images</string>
+    <string name="pricing_feature_upload_10">Max upload 10 MB</string>
+    <string name="pricing_feature_upload_20">Max upload 20 MB</string>
+    <string name="pricing_feature_upload_50">Max upload 50 MB</string>
+    <string name="pricing_feature_turnaround">Turnaround: immediate</string>
+    <string name="pricing_feature_turnaround_priority">Turnaround: immediate + priority</string>
+    <string name="pricing_feature_brand_safe">Brand-safe outputs</string>
+    <string name="pricing_feature_no_watermark">No watermark</string>
+    <string name="pricing_feature_ai_outputs">AI-powered photoshoot outputs</string>
+    <string name="pricing_feature_model_background">Model &amp; background template libraries</string>
+    <string name="pricing_feature_bulk_upload">Bulk upload</string>
+    <string name="pricing_feature_support_email">Support: email</string>
+    <string name="pricing_feature_support_chat">Support: email &amp; chat</string>
+    <string name="pricing_feature_support_priority">Support: email, chat &amp; priority</string>
+    <string name="pricing_feature_premium_models">Premium models: limited</string>
+    <string name="pricing_feature_premium_models_full">Premium models: full</string>
+    <string name="pricing_feature_premium_backgrounds_limited">Premium backgrounds: limited</string>
+    <string name="pricing_feature_premium_backgrounds_full">Premium backgrounds: full</string>
+    <string name="pricing_feature_rendering_faster">Rendering: faster</string>
+    <string name="pricing_feature_rendering_fastest">Rendering: fastest</string>
+    <string name="pricing_country_message">Country set to %1$s.</string>
+    <string name="pricing_plan_action_message">%1$s selected. Payment flow can be connected next.</string>
+    <string name="account_title">Your Profile</string>
+    <string name="account_subtitle">Manage your profile details, business identity, and contact information.</string>
+    <string name="account_profile_picture">Profile Picture</string>
+    <string name="account_picture_hint">Change profile photo</string>
+    <string name="account_details_title">Profile Details</string>
+    <string name="account_branding_title">Branding</string>
+    <string name="account_branding_subtitle">Keep your business logo ready for branded catalogue exports.</string>
+    <string name="account_full_name">Full name</string>
+    <string name="account_business_name">Business name</string>
+    <string name="account_email_address">Email address</string>
+    <string name="account_mobile_number">Mobile number</string>
+    <string name="account_update_password">Update Password</string>
+    <string name="account_save_changes">Save Changes</string>
+    <string name="account_cancel">Cancel</string>
+    <string name="update_password_title">Update Password</string>
+    <string name="update_password_subtitle">Create a new password for your account and keep your profile secure.</string>
+    <string name="update_password_back">Back to Profile</string>
+    <string name="update_password_current">Current password</string>
+    <string name="update_password_new">New password</string>
+    <string name="update_password_confirm">Confirm password</string>
+    <string name="update_password_button">Update</string>
+    <string name="update_password_error_current">Enter your current password.</string>
+    <string name="update_password_error_new">Enter a new password.</string>
+    <string name="update_password_error_confirm">Confirm your new password.</string>
+    <string name="update_password_error_length">Use at least 6 characters.</string>
+    <string name="update_password_error_mismatch">Passwords do not match.</string>
+    <string name="update_password_success_message">Password updated successfully.</string>
 </resources>

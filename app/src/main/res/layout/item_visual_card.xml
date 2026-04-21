@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            tools:src="@drawable/model_img" />
+            tools:src="@drawable/ic_gallery" />
     </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>
