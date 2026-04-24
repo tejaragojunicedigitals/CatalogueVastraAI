@@ -3,8 +3,12 @@ package com.nice.cataloguevastra.repositories
 import android.net.Uri
 import com.nice.cataloguevastra.R
 import com.nice.cataloguevastra.model.AddBackgroundData
+import com.nice.cataloguevastra.model.CatalogueCardUiModel
+import com.nice.cataloguevastra.model.CatalogueImageUiModel
 import com.nice.cataloguevastra.model.CatalogueUiState
 import com.nice.cataloguevastra.model.CatalogueThemeUiModel
+import com.nice.cataloguevastra.model.DeleteCatalogueResponse
+import com.nice.cataloguevastra.model.GenerateCatalogueResult
 import com.nice.cataloguevastra.model.GarmentSubcategoryItem
 import com.nice.cataloguevastra.model.ImageRatioItem
 import com.nice.cataloguevastra.model.ChipUiModel
@@ -18,6 +22,7 @@ import com.nice.cataloguevastra.model.RailItemUiModel
 import com.nice.cataloguevastra.model.RailSectionUiModel
 import com.nice.cataloguevastra.model.ThemeListItem
 import com.nice.cataloguevastra.model.UploadedModelItem
+import java.time.LocalDate
 import kotlin.collections.plus
 
 class DummyCatalogueRepository : CatalogueRepository {
@@ -72,18 +77,25 @@ class DummyCatalogueRepository : CatalogueRepository {
             platforms = listOf(
                 ChipUiModel("amazon", "Amazon", true),
                 ChipUiModel("flipkart", "Flipkart", false),
-                ChipUiModel("myntra", "Myntra", false),
+                ChipUiModel("ebay", "EBay", false),
                 ChipUiModel("shopify", "Shopify", false),
-                ChipUiModel("meesho", "Meesho", false)
+                ChipUiModel("myntra", "Myntra", false),
+                ChipUiModel("nykaa fashion", "Nykaa Fashion", false),
+                ChipUiModel("etsy", "Etsy", false),
+                ChipUiModel("custom", "Custom", false)
             ),
             aspectRatios = listOf(
-                ChipUiModel("1_1", "1:1", true),
-                ChipUiModel("3_4", "3:4", false),
-                ChipUiModel("4_3", "4:3", false),
-                ChipUiModel("4_5", "4:5", false),
-                ChipUiModel("16_9", "16:9", false),
-                ChipUiModel("9_16", "9:16", false)
+                ChipUiModel("1:1", "1:1", true),
+                ChipUiModel("3:4", "3:4", false),
+                ChipUiModel("4:3", "4:3", false),
+                ChipUiModel("4:5", "4:5", false),
+                ChipUiModel("16:9", "16:9", false),
+                ChipUiModel("9:16", "9:16", false),
+                ChipUiModel("Custom", "Custom", false)
             ),
+            resolutionWidth = "2000",
+            resolutionHeight = "2000",
+            isResolutionEditable = false,
             modelRail = RailSectionUiModel(
                 items = listOf(
                     RailItemUiModel.Upload(
@@ -143,6 +155,43 @@ class DummyCatalogueRepository : CatalogueRepository {
                     ModelSheetItemUiModel("your_tara", "Own 2", R.drawable.model_img),
                     ModelSheetItemUiModel("your_sana", "Own 3", R.drawable.model_img),
                     ModelSheetItemUiModel("your_isha", "Own 4", R.drawable.model_img)
+                )
+            )
+        )
+    }
+
+    override suspend fun getCatalogues(page: Int, format: String): Result<List<CatalogueCardUiModel>> {
+        val today = LocalDate.now()
+        return Result.success(
+            listOf(
+                CatalogueCardUiModel(
+                    id = "5824",
+                    title = "Catalogue_5824 - 3 Images",
+                    subtitle = "${today} | Amazon | 1:1",
+                    previewImageRes = R.drawable.ic_gallery,
+                    previewImageUrl = null,
+                    thumbnails = listOf(
+                        CatalogueImageUiModel(imageRes = R.drawable.ic_gallery),
+                        CatalogueImageUiModel(imageRes = R.drawable.model),
+                        CatalogueImageUiModel(imageRes = R.drawable.ic_gallery)
+                    ),
+                    createdDateIso = today.toString(),
+                    categoryTag = "Men's",
+                    platformTag = "Amazon"
+                ),
+                CatalogueCardUiModel(
+                    id = "5823",
+                    title = "Catalogue_5823 - 4 Images",
+                    subtitle = "${today.minusDays(1)} | Amazon | 1:1",
+                    previewImageRes = R.drawable.model,
+                    previewImageUrl = null,
+                    thumbnails = listOf(
+                        CatalogueImageUiModel(imageRes = R.drawable.model),
+                        CatalogueImageUiModel(imageRes = R.drawable.ic_gallery)
+                    ),
+                    createdDateIso = today.minusDays(1).toString(),
+                    categoryTag = "Men's",
+                    platformTag = "Amazon"
                 )
             )
         )
@@ -226,6 +275,38 @@ class DummyCatalogueRepository : CatalogueRepository {
                 id = 998,
                 image = imageUri.toString(),
                 modelimage = imageUri.toString()
+            )
+        )
+    }
+
+    override suspend fun generateCatalogue(
+        params: GenerateCatalogueParams,
+        onProgress: suspend (com.nice.cataloguevastra.model.GenerateCatalogueProgress) -> Unit
+    ): Result<GenerateCatalogueResult> {
+        onProgress(
+            com.nice.cataloguevastra.model.GenerateCatalogueProgress(
+                completed = 1,
+                total = 1,
+                message = "Generated."
+            )
+        )
+        return Result.success(
+            GenerateCatalogueResult(
+                title = params.title.ifBlank { "Generated Catalogue" },
+                imageUrls = listOf(params.productImageUri.toString()),
+                garmentId = 0,
+                creditsBalance = null
+            )
+        )
+    }
+
+    override suspend fun deleteCatalogue(catalogueId: String): Result<DeleteCatalogueResponse> {
+        return Result.success(
+            DeleteCatalogueResponse(
+                status = true,
+                message = "Catalogues deleted successfully",
+                deletedGarmentIds = listOfNotNull(catalogueId.toIntOrNull()),
+                removedRows = 1
             )
         )
     }

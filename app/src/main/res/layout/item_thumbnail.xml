@@ -16,6 +16,6 @@
         android:id="@+id/imgThumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/model_img" />
+        android:scaleType="fitXY"
+        tools:src="@drawable/ic_gallery" />
 </com.google.android.material.card.MaterialCardView>

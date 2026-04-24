@@ -5,8 +5,14 @@ data class CatalogueCardUiModel(
     val title: String,
     val subtitle: String,
     val previewImageRes: Int,
-    val thumbnails: List<Int>,
+    val previewImageUrl: String? = null,
+    val thumbnails: List<CatalogueImageUiModel> = emptyList(),
     val createdDateIso: String,
     val categoryTag: String,
     val platformTag: String
+)
+
+data class CatalogueImageUiModel(
+    val url: String? = null,
+    val imageRes: Int? = null
 )

@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fillViewport="true"
     tools:context=".ui.activities.SignUpActivity">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progressIndicator"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <TextView
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -281,21 +279,32 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/passwordInput"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:autofillHints="newPassword"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/satoshi_medium"
-            android:hint="@string/signup_password_hint"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:paddingHorizontal="14dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/ash"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:autofillHints="newPassword"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/satoshi_medium"
+                android:hint="@string/signup_password_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:paddingStart="14dp"
+                android:paddingEnd="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/ash"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/createAccountButton"
@@ -331,8 +340,21 @@
                 android:paddingStart="4dp"
                 android:fontFamily="@font/satoshi_bold"
                 android:text="@string/signup_signin_cta"
-                android:textColor="@color/primaryColor"
-                android:textSize="14sp" />
+            android:textColor="@color/primaryColor"
+            android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+
+    </ScrollView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="@dimen/_8sdp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/primaryColor"
+        app:trackColor="@color/primaryContainer" />
+</FrameLayout>

@@ -43,6 +43,7 @@
             app:tint="@color/textSecondary" />
 
         <TextView
+            android:id="@+id/modelSheetSubtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"

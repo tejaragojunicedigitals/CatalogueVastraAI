@@ -29,6 +29,20 @@
         app:layout_constraintTop_toBottomOf="@id/shellAppBarInclude"
         app:navGraph="@navigation/main_nav_graph" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_8sdp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/primaryColor"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shellAppBarInclude"
+        app:trackColor="@color/primaryContainer" />
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"

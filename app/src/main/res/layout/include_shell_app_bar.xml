@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/shellAppBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/top_bar_logo"
                 android:scaleType="fitStart"
-                android:src="@drawable/aivastra_logo"
+                android:src="@drawable/logonew"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -85,15 +86,34 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_bold"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
                             android:paddingStart="@dimen/_18sdp"
-                            android:paddingEnd="@dimen/_18sdp"
-                            android:text="@string/credits_text"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp" />
+                            android:paddingEnd="@dimen/_18sdp">
+
+                            <TextView
+                                android:id="@+id/creditBalanceTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="0"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_13ssp"
+                                tools:text="5" />
+
+                            <TextView
+                                android:id="@+id/creditLabelTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/credits_left_label"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
 
                         <FrameLayout
                             android:layout_width="@dimen/_45sdp"

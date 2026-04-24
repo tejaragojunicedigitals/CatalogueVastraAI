@@ -66,7 +66,7 @@ class LoginActivity : BaseBindingActivity<ActivityLoginBinding>() {
     private fun observeUiState() {
         collectLatestLifecycleFlow(viewModel.formState) { state ->
             binding.usernameInput.error = state.usernameError
-            binding.passwordInput.error = state.passwordError
+            binding.passwordInputLayout.error = state.passwordError
         }
 
         collectLatestLifecycleFlow(viewModel.apiState) { state ->

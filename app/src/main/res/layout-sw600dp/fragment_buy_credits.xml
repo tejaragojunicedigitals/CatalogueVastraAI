@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBackground"
+    tools:context=".ui.fragments.BuyCreditsFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingHorizontal="@dimen/screen_horizontal_margin"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_120sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="1280dp">
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:text="@string/buy_credits_title"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_24ssp" />
+
+                <TextView
+                    android:id="@+id/subtitleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:lineSpacingExtra="@dimen/_2sdp"
+                    android:text="@string/buy_credits_subtitle"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_14sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/strokeLight"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <TextView
+                        android:id="@+id/balanceValueText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:paddingHorizontal="@dimen/_14sdp"
+                        android:paddingVertical="@dimen/_14sdp"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/_15ssp"
+                        tools:text="Balance: 17,538 credits" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.05"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_18sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/strokeLight"
+                            app:strokeWidth="@dimen/_1sdp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_18sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_summary_title"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_18ssp" />
+
+                                    <TextView
+                                        android:id="@+id/resetPackButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_reset_pack"
+                                        android:textColor="@color/primaryColor"
+                                        android:textSize="@dimen/_12ssp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/generationNeedText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_14ssp"
+                                    tools:text="Generating this catalogue needs 100 credits for 4 selected poses." />
+
+                                <TextView
+                                    android:id="@+id/purchaseHintText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp"
+                                    tools:text="You need 100 more credits to continue this generation." />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:baselineAligned="false"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/starterPackCard"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        android:layout_weight="1"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_16sdp"
+                                        app:cardElevation="0dp"
+                                        app:strokeColor="@color/strokeLight"
+                                        app:strokeWidth="@dimen/_1sdp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_14sdp">
+
+                                            <TextView
+                                                android:id="@+id/starterPackTitle"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/satoshi_bold"
+                                                android:textColor="@color/textPrimary"
+                                                android:textSize="@dimen/_15ssp"
+                                                tools:text="Starter Pack" />
+
+                                            <TextView
+                                                android:id="@+id/starterPackMeta"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/_4sdp"
+                                                android:fontFamily="@font/satoshi_medium"
+                                                android:textColor="@color/textSecondary"
+                                                android:textSize="@dimen/_13ssp"
+                                                tools:text="2,500 credits • ₹2,500" />
+                                        </LinearLayout>
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/growthPackCard"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        android:layout_weight="1"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_16sdp"
+                                        app:cardElevation="0dp"
+                                        app:strokeColor="@color/strokeLight"
+                                        app:strokeWidth="@dimen/_1sdp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_14sdp">
+
+                                            <TextView
+                                                android:id="@+id/growthPackTitle"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/satoshi_bold"
+                                                android:textColor="@color/textPrimary"
+                                                android:textSize="@dimen/_15ssp"
+                                                tools:text="Growth Pack" />
+
+                                            <TextView
+                                                android:id="@+id/growthPackMeta"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/_4sdp"
+                                                android:fontFamily="@font/satoshi_medium"
+                                                android:textColor="@color/textSecondary"
+                                                android:textSize="@dimen/_13ssp"
+                                                tools:text="5,000 credits • ₹5,000" />
+                                        </LinearLayout>
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/proPackCard"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_16sdp"
+                                        app:cardElevation="0dp"
+                                        app:strokeColor="@color/strokeLight"
+                                        app:strokeWidth="@dimen/_1sdp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:padding="@dimen/_14sdp">
+
+                                            <TextView
+                                                android:id="@+id/proPackTitle"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/satoshi_bold"
+                                                android:textColor="@color/textPrimary"
+                                                android:textSize="@dimen/_15ssp"
+                                                tools:text="Pro Pack" />
+
+                                            <TextView
+                                                android:id="@+id/proPackMeta"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/_4sdp"
+                                                android:fontFamily="@font/satoshi_medium"
+                                                android:textColor="@color/textSecondary"
+                                                android:textSize="@dimen/_13ssp"
+                                                tools:text="10,000 credits • ₹10,000" />
+                                        </LinearLayout>
+                                    </com.google.android.material.card.MaterialCardView>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:layout_marginBottom="@dimen/_16sdp"
+                                    android:background="@color/strokeLight" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:text="@string/buy_credits_selected_pack_label"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:id="@+id/selectedPackNameValue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_16ssp"
+                                    tools:text="Growth Pack" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_12sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:text="@string/buy_credits_selected_credits_label"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:id="@+id/selectedCreditsValue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_16ssp"
+                                    tools:text="+5,000 credits" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_12sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:text="@string/buy_credits_post_topup_label"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:id="@+id/topUpImpactValue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_16ssp"
+                                    tools:text="22,538 credits after purchase" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:text="@string/buy_credits_total_label"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <TextView
+                                    android:id="@+id/totalAmountValue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_4sdp"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_26ssp"
+                                    tools:text="₹5,000" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_18sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/primaryColor"
+                            app:strokeWidth="@dimen/_1sdp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_18sdp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:text="@string/buy_credits_payment_title"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_18ssp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_6sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:lineSpacingExtra="@dimen/_2sdp"
+                                    android:text="@string/buy_credits_payment_subtitle"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_13ssp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/payNowButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_48sdp"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:background="@drawable/gradient_bg"
+                                    android:insetTop="0dp"
+                                    android:insetBottom="0dp"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_14ssp"
+                                    app:cornerRadius="@dimen/_12sdp"
+                                    tools:text="Pay ₹5,000 Securely" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:layout_marginBottom="@dimen/_16sdp"
+                                    android:background="@color/strokeLight" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/satoshi_bold"
+                                    android:text="@string/buy_credits_note_label"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_14ssp" />
+
+                                <EditText
+                                    android:id="@+id/teamNoteInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_96sdp"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:background="@drawable/et_bg"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:gravity="top|start"
+                                    android:hint="@string/buy_credits_note_hint"
+                                    android:inputType="textCapSentences|textMultiLine"
+                                    android:padding="@dimen/_12sdp"
+                                    android:textColor="@color/textPrimary"
+                                    android:textColorHint="@color/textMuted"
+                                    android:textSize="@dimen/_14ssp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/requestInvoiceButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_48sdp"
+                                    android:layout_marginTop="@dimen/_16sdp"
+                                    android:background="@drawable/gradient_bg"
+                                    android:insetTop="0dp"
+                                    android:insetBottom="0dp"
+                                    android:text="@string/buy_credits_invoice_button"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_14ssp"
+                                    app:cornerRadius="@dimen/_12sdp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_8sdp"
+                                    android:fontFamily="@font/satoshi_medium"
+                                    android:lineSpacingExtra="@dimen/_2sdp"
+                                    android:text="@string/buy_credits_invoice_caption"
+                                    android:textColor="@color/textSecondary"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_18sdp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/strokeLight"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_18sdp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_billing_title"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_18ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:lineSpacingExtra="@dimen/_2sdp"
+                                android:text="@string/buy_credits_billing_subtitle"
+                                android:textColor="@color/textSecondary"
+                                android:textSize="@dimen/_13ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_16sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_full_name"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/fullNameInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_full_name_hint"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_phone"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/phoneInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_phone_hint"
+                                android:inputType="phone"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_company"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/companyInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_company_hint"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_address_line_1"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/addressLineOneInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_address_line_1_hint"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_address_line_2"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/addressLineTwoInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_address_line_2_hint"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_city"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <EditText
+                                        android:id="@+id/cityInput"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_48sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/et_bg"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:hint="@string/buy_credits_city_hint"
+                                        android:paddingHorizontal="@dimen/_12sdp"
+                                        android:textColor="@color/textPrimary"
+                                        android:textColorHint="@color/textMuted"
+                                        android:textSize="@dimen/_14ssp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_state"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <EditText
+                                        android:id="@+id/stateInput"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_48sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/et_bg"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:hint="@string/buy_credits_state_hint"
+                                        android:paddingHorizontal="@dimen/_12sdp"
+                                        android:textColor="@color/textPrimary"
+                                        android:textColorHint="@color/textMuted"
+                                        android:textSize="@dimen/_14ssp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_postal_code"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <EditText
+                                        android:id="@+id/postalCodeInput"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_48sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/et_bg"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:hint="@string/buy_credits_postal_code_hint"
+                                        android:inputType="number"
+                                        android:paddingHorizontal="@dimen/_12sdp"
+                                        android:textColor="@color/textPrimary"
+                                        android:textColorHint="@color/textMuted"
+                                        android:textSize="@dimen/_14ssp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:text="@string/buy_credits_country"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <EditText
+                                        android:id="@+id/countryInput"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_48sdp"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/et_bg"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:hint="@string/buy_credits_country_hint"
+                                        android:paddingHorizontal="@dimen/_12sdp"
+                                        android:text="India"
+                                        android:textColor="@color/textPrimary"
+                                        android:textColorHint="@color/textMuted"
+                                        android:textSize="@dimen/_14ssp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/buy_credits_gstin"
+                                android:textColor="@color/textPrimary"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <EditText
+                                android:id="@+id/gstinInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:background="@drawable/et_bg"
+                                android:fontFamily="@font/satoshi_medium"
+                                android:hint="@string/buy_credits_gstin_hint"
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:textColor="@color/textPrimary"
+                                android:textColorHint="@color/textMuted"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/saveDetailsButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_48sdp"
+                                android:layout_marginTop="@dimen/_18sdp"
+                                android:background="@drawable/gradient_bg"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:minWidth="@dimen/_150sdp"
+                                android:text="@string/buy_credits_save_details"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp"
+                                app:cornerRadius="@dimen/_12sdp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,9 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingHorizontal="@dimen/screen_horizontal_margin"
-    android:paddingTop="@dimen/_16sdp"
     tools:context=".ui.fragments.AssetsFragment">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingHorizontal="@dimen/screen_horizontal_margin"
+            android:paddingTop="@dimen/_16sdp">
 
     <LinearLayout
         android:id="@+id/headerContent"
@@ -52,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toStartOf="@id/sortButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerDivider"
         app:tabIndicatorColor="@color/primaryColor"
@@ -64,56 +78,86 @@
         app:tabTextAppearance="@style/TextAppearance.CatalogueVastra.AssetsTab"
         app:tabTextColor="@color/ash" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sortButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:minWidth="0dp"
-        android:text="@string/assets_upload_date"
-        android:textAllCaps="false"
-        android:textColor="@color/bottomNavInactive"
-        android:textSize="@dimen/_14ssp"
-        app:backgroundTint="@color/white"
-        app:cornerRadius="@dimen/input_corner_radius"
-        app:icon="@drawable/ic_arrow_drop_down"
-        app:iconGravity="textEnd"
-        app:iconPadding="@dimen/_10sdp"
-        app:iconTint="@color/bottomNavInactive"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerDivider"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="@dimen/_1sdp" />
-
     <TextView
-        android:id="@+id/emptyStateText"
+        android:id="@+id/categoryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/satoshi_medium"
-        android:text="@string/assets_empty_state"
-        android:textColor="@color/ash"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/satoshi_bold"
+        android:text="@string/assets_category"
+        android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assetTabs" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assetsRecyclerView"
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/categoryInput"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:background="@drawable/et_bg"
+        android:drawableEnd="@drawable/ic_arrow_drop_down"
+        android:drawablePadding="@dimen/_8sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/satoshi_regular"
+        android:gravity="center_vertical"
+        android:inputType="none"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/_12sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingRight="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:textColor="@color/textPrimary"
+        android:textColorHint="@color/textSecondary"
+        android:textSize="@dimen/_12ssp"
+        app:drawableTint="@color/textSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryLabel" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/assetsContentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/_96sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emptyStateText"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_asset_card" />
+        app:layout_constraintTop_toBottomOf="@id/categoryInput">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/assetsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/_96sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_asset_card" />
+
+        <TextView
+            android:id="@+id/emptyStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_medium"
+            android:gravity="center"
+            android:text="@string/assets_empty_state"
+            android:textAlignment="center"
+            android:textColor="@color/ash"
+            android:textSize="@dimen/_14ssp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/uploadAssetButton"

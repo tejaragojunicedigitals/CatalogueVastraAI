@@ -42,6 +42,7 @@
                     app:tint="@color/black" />
 
                 <TextView
+                    android:id="@+id/titleText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -80,44 +81,29 @@
                 app:strokeWidth="@dimen/_1sdp">
 
                 <FrameLayout
+                    android:id="@+id/previewContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/generated_preview_height"
                     android:padding="@dimen/_8sdp">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_500sdp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/placeholder_bg_arch" />
-
-                    <ImageView
-                        android:id="@+id/mainPreviewImage"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/model" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top|start"
-                        android:layout_margin="@dimen/_10sdp"
                         app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_8sdp"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/strokeLight"
-                        app:strokeWidth="@dimen/_1sdp">
+                        app:cardCornerRadius="@dimen/generated_preview_corner_radius"
+                        app:cardElevation="0dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/business_logo" />
+                            android:id="@+id/mainPreviewImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY" />
 
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/previousButton"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_gravity="center_vertical|start"
@@ -136,6 +122,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/nextButton"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_gravity="center_vertical|end"
@@ -162,6 +149,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/imageCountChip"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_40sdp"
                             app:cardBackgroundColor="#33FFFFFF"
@@ -169,6 +157,7 @@
                             app:cardElevation="0dp">
 
                             <TextView
+                                android:id="@+id/imageCountText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="@dimen/_12sdp"
@@ -235,5 +224,85 @@
                 tools:listitem="@layout/item_thumbnail" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/generationProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/screenBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/screen_horizontal_margin"
+            android:background="@drawable/bg_generation_progress_panel"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_24sdp">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_gravity="center_horizontal"
+                android:indeterminate="true"
+                app:indicatorColor="@color/primaryColor"
+                app:indicatorSize="@dimen/_60sdp"
+                app:trackColor="@color/primaryContainer"
+                app:trackThickness="@dimen/_5sdp" />
+
+            <TextView
+                android:id="@+id/generationProgressMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:gravity="center"
+                android:text="@string/generating_images"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/satoshi_medium"
+                android:gravity="center"
+                android:text="@string/generated_progress_hint"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/generationProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:max="100"
+                android:progress="0"
+                app:indicatorColor="@color/primaryColor"
+                app:trackColor="@color/primaryContainer"
+                app:trackCornerRadius="@dimen/_4sdp"
+                app:trackThickness="@dimen/_8sdp" />
+
+            <TextView
+                android:id="@+id/generationProgressPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="0%"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

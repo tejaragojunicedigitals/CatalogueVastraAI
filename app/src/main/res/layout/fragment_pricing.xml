@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.fragments.PricingFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -13,6 +12,7 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:fillViewport="true"
+        android:overScrollMode="never"
         android:paddingHorizontal="@dimen/screen_horizontal_margin"
         android:paddingTop="@dimen/_16sdp"
         android:paddingBottom="@dimen/_120sdp"
@@ -26,178 +26,112 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/headerContent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/countryButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/pricing_title"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_24ssp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:fontFamily="@font/satoshi_medium"
-                        android:text="@string/pricing_subtitle"
-                        android:textColor="@color/ash"
-                        android:textSize="@dimen/_16ssp" />
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/countryButton"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_40sdp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minWidth="0dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/bottomNavInactive"
-                    android:textSize="@dimen/_14ssp"
-                    app:backgroundTint="@color/white"
-                    app:cornerRadius="@dimen/input_corner_radius"
-                    app:icon="@drawable/ic_arrow_drop_down"
-                    app:iconGravity="textEnd"
-                    app:iconPadding="@dimen/_8sdp"
-                    app:iconTint="@color/bottomNavInactive"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/grey"
-                    app:strokeWidth="@dimen/_1sdp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_18sdp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_18sdp"
+                app:cardCornerRadius="@dimen/_20sdp"
                 app:cardElevation="0dp"
-                app:strokeColor="@color/strokeLight"
+                app:strokeColor="@color/pricingPlanBorder"
                 app:strokeWidth="@dimen/_1sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_pricing_summary"
+                    android:background="@drawable/bg_pricing_compare_hero"
                     android:orientation="vertical"
                     android:padding="@dimen/_16sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:gravity="end">
 
-                        <ImageView
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
-                            android:src="@drawable/ic_credit_coin"
-                            app:tint="@color/primaryColor" />
-
-                        <TextView
-                            android:id="@+id/creditsValue"
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/countryButton"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/satoshi_bold"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/_20ssp"
-                            tools:text="Your credits: 2518" />
+                            android:layout_height="@dimen/_40sdp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:minWidth="0dp"
+                            android:paddingHorizontal="@dimen/_12sdp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/bottomNavInactive"
+                            android:textSize="@dimen/_13ssp"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="@dimen/input_corner_radius"
+                            app:icon="@drawable/ic_arrow_drop_down"
+                            app:iconGravity="textEnd"
+                            app:iconPadding="@dimen/_6sdp"
+                            app:iconTint="@color/bottomNavInactive"
+                            app:strokeColor="@color/pricingPlanBorder"
+                            app:strokeWidth="@dimen/_1sdp"
+                            tools:text="India" />
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/creditsUsage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:fontFamily="@font/satoshi_medium"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="1 credit = 1 generated image. Paid packs are added after admin approval." />
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:gravity="center"
+                        android:text="@string/pricing_title"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/_24ssp" />
 
-                    <ProgressBar
-                        android:id="@+id/creditsProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_14sdp"
-                        android:indeterminate="false"
-                        android:progressBackgroundTint="@color/grey"
-                        android:progressTint="@color/primaryColor" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/_2sdp"
+                        android:text="@string/pricing_subtitle"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <LinearLayout
+                        android:id="@+id/pricingPlansContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_18sdp"
+                        android:orientation="vertical" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:fontFamily="@font/satoshi_bold"
-                android:text="@string/pricing_packs_title"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp" />
-
-            <TextView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:fontFamily="@font/satoshi_medium"
-                android:text="@string/pricing_packs_subtitle"
-                android:textColor="@color/ash"
-                android:textSize="@dimen/_13ssp" />
+                android:layout_marginTop="@dimen/_16sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_20sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/pricingPlanBorder"
+                app:strokeWidth="@dimen/_1sdp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pricingPlansRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingBottom="@dimen/_16sdp"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_pricing_plan" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_12sdp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:fontFamily="@font/satoshi_bold"
-                android:text="@string/pricing_history_title"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/pricing_mobile_compare_title"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/_18ssp" />
 
-            <TextView
-                android:id="@+id/historyEmptyState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/satoshi_medium"
-                android:text="@string/pricing_history_empty"
-                android:textColor="@color/ash"
-                android:textSize="@dimen/_14ssp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/historyRowsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical" />
+                    <LinearLayout
+                        android:id="@+id/pricingComparisonTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

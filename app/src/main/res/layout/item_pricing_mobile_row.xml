@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_14sdp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/pricingTableDivider"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp">
+
+        <TextView
+            android:id="@+id/featureText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/satoshi_bold"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/_13ssp"
+            tools:text="Brand-safe Outputs" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_pricing_mobile_value_pill"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:gravity="center"
+                    android:text="@string/pricing_plan_starter_short"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/starterText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:gravity="center"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Yes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_pricing_mobile_value_pill"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:gravity="center"
+                    android:text="@string/pricing_plan_growth_short"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/growthText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:gravity="center"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Yes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_pricing_mobile_value_pill"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:gravity="center"
+                    android:text="@string/pricing_plan_pro_short"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/proText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/satoshi_bold"
+                    android:gravity="center"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Yes" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -52,9 +52,8 @@
                     android:textColor="@color/ash"
                     android:textSize="@dimen/_14ssp" />
 
-
-
                     <LinearLayout
+                        android:id="@+id/profileImageSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
@@ -78,6 +77,7 @@
                                 app:shapeAppearanceOverlay="@style/CircleImage" />
 
                             <ImageView
+                                android:id="@+id/profileImageCameraButton"
                                 android:layout_width="@dimen/_32sdp"
                                 android:layout_height="@dimen/_32sdp"
                                 android:padding="@dimen/_6sdp"
@@ -87,6 +87,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
+                            android:id="@+id/profileImageHint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_12sdp"
@@ -138,10 +139,11 @@
                             android:background="@drawable/et_bg"
                             android:fontFamily="@font/satoshi_medium"
                             android:hint="@string/account_full_name"
+                            android:inputType="textPersonName"
                             android:paddingHorizontal="@dimen/_12sdp"
-                            android:text="John Doe"
                             android:textColor="@color/ash"
-                            android:textSize="@dimen/_14ssp" />
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="Ram" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -160,10 +162,11 @@
                             android:background="@drawable/et_bg"
                             android:fontFamily="@font/satoshi_medium"
                             android:hint="@string/account_business_name"
+                            android:inputType="textCapWords"
                             android:paddingHorizontal="@dimen/_12sdp"
-                            android:text="Fashion Space"
                             android:textColor="@color/ash"
-                            android:textSize="@dimen/_14ssp" />
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="My Studio" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -182,10 +185,11 @@
                             android:background="@drawable/et_bg"
                             android:fontFamily="@font/satoshi_medium"
                             android:hint="@string/account_email_address"
+                            android:inputType="textEmailAddress"
                             android:paddingHorizontal="@dimen/_12sdp"
-                            android:text="johndoe@email.com"
                             android:textColor="@color/ash"
-                            android:textSize="@dimen/_14ssp" />
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="teja@example.com" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -204,56 +208,24 @@
                             android:background="@drawable/et_bg"
                             android:fontFamily="@font/satoshi_medium"
                             android:hint="@string/account_mobile_number"
+                            android:inputType="phone"
                             android:paddingHorizontal="@dimen/_12sdp"
-                            android:text="968234711"
                             android:textColor="@color/ash"
-                            android:textSize="@dimen/_14ssp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_14sdp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/_18sdp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="@color/strokeLight"
-                    app:strokeWidth="@dimen/_1sdp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_20sdp">
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="+919876543210" />
 
                         <TextView
+                            android:id="@+id/businessLogoLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satoshi_bold"
-                            android:text="@string/account_branding_title"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/_16ssp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/satoshi_medium"
-                            android:text="@string/account_branding_subtitle"
-                            android:textColor="@color/ash"
-                            android:textSize="@dimen/_13ssp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_24sdp"
                             android:fontFamily="@font/satoshi_bold"
                             android:text="@string/business_logo_label"
                             android:textColor="@color/textPrimary"
                             android:textSize="@dimen/_14ssp" />
 
                         <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/businessLogoCard"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
@@ -267,7 +239,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:minHeight="@dimen/_48sdp"
-                                android:paddingHorizontal="@dimen/_12sdp">
+                                android:paddingHorizontal="@dimen/_12sdp"
+                                android:paddingVertical="@dimen/_8sdp">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/businessLogoImage"
+                                    android:layout_width="@dimen/_48sdp"
+                                    android:layout_height="@dimen/_48sdp"
+                                    android:background="@color/white"
+                                    android:padding="@dimen/_6sdp"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/business_logo"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:shapeAppearanceOverlay="@style/CircleImage" />
 
                                 <TextView
                                     android:id="@+id/businessLogoValue"
@@ -276,12 +262,14 @@
                                     android:ellipsize="end"
                                     android:fontFamily="@font/satoshi_regular"
                                     android:maxLines="1"
+                                    android:text="@string/account_no_business_logo"
                                     android:textColor="@color/textSecondary"
                                     android:textSize="@dimen/_12ssp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"
-                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/businessLogoImage"
                                     app:layout_constraintTop_toTopOf="parent"
+                                    android:layout_marginStart="@dimen/_12sdp"
                                     tools:text="logo.jpg" />
 
                                 <TextView
@@ -297,6 +285,16 @@
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/updatePasswordText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_18sdp"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_update_password"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="@dimen/_13ssp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -338,28 +336,300 @@
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_18sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/strokeLight"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_16sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/account_credit_activity_title"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/_16ssp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/account_credit_activity_subtitle"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="@dimen/_14sdp"
+                                app:cardElevation="0dp"
+                                app:strokeColor="@color/strokeLight"
+                                app:strokeWidth="@dimen/_1sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/_14sdp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_current_balance"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:id="@+id/currentBalanceValue"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_28ssp"
+                                        tools:text="893" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_balance_caption"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="@dimen/_14sdp"
+                                app:cardElevation="0dp"
+                                app:strokeColor="@color/strokeLight"
+                                app:strokeWidth="@dimen/_1sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/_14sdp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_total_added"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:id="@+id/totalAddedValue"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_28ssp"
+                                        tools:text="2605" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_added_caption"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="@dimen/_14sdp"
+                                app:cardElevation="0dp"
+                                app:strokeColor="@color/strokeLight"
+                                app:strokeWidth="@dimen/_1sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/_14sdp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_total_used"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:id="@+id/totalUsedValue"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_28ssp"
+                                        tools:text="17400" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_used_caption"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="@dimen/_14sdp"
+                                app:cardElevation="0dp"
+                                app:strokeColor="@color/strokeLight"
+                                app:strokeWidth="@dimen/_1sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/_14sdp">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_images_charged"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <TextView
+                                        android:id="@+id/imagesChargedValue"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:fontFamily="@font/satoshi_bold"
+                                        android:textColor="@color/textPrimary"
+                                        android:textSize="@dimen/_28ssp"
+                                        tools:text="696" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:fontFamily="@font/satoshi_medium"
+                                        android:text="@string/account_credit_images_caption"
+                                        android:textColor="@color/ash"
+                                        android:textSize="@dimen/_12ssp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_14sdp"-->
+<!--                    app:cardBackgroundColor="@color/white"-->
+<!--                    app:cardCornerRadius="@dimen/_18sdp"-->
+<!--                    app:cardElevation="0dp"-->
+<!--                    app:strokeColor="@color/strokeLight"-->
+<!--                    app:strokeWidth="@dimen/_1sdp">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="@dimen/_20sdp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/satoshi_bold"-->
+<!--                            android:text="@string/account_logout_title"-->
+<!--                            android:textColor="@color/textPrimary"-->
+<!--                            android:textSize="@dimen/_16ssp" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="@dimen/_4sdp"-->
+<!--                            android:fontFamily="@font/satoshi_medium"-->
+<!--                            android:text="@string/account_logout_subtitle"-->
+<!--                            android:textColor="@color/ash"-->
+<!--                            android:textSize="@dimen/_13ssp" />-->
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/logoutProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:indeterminate="true"
+                            android:visibility="gone"
+                            app:indicatorColor="@color/red"
+                            app:trackColor="@color/lightyellow" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/logoutButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_48sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/account_logout_button"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/_14ssp"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="@dimen/input_corner_radius"
+                            app:strokeColor="@color/red"
+                            app:strokeWidth="@dimen/_1sdp" />
+
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/createNewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_48sdp"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:elevation="@dimen/_6sdp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:minWidth="0dp"
-        android:paddingHorizontal="@dimen/_18sdp"
-        android:text="@string/account_update_password"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp"
-        android:background="@drawable/gradient_bg"
-        app:cornerRadius="@dimen/_24sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -144,46 +144,46 @@
                                 app:drawableTint="@color/textSecondary" />
                         </LinearLayout>
 
-                        <Space
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="wrap_content" />
+<!--                        <Space-->
+<!--                            android:layout_width="@dimen/_12sdp"-->
+<!--                            android:layout_height="wrap_content" />-->
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:orientation="vertical">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/satoshi_bold"
-                                android:text="@string/outfit_type_label"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_14ssp" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/satoshi_bold"-->
+<!--                                android:text="@string/outfit_type_label"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="@dimen/_14ssp" />-->
 
-                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                android:id="@+id/outfitTypeInput"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_50sdp"
-                                android:layout_marginTop="@dimen/_6sdp"
-                                android:background="@drawable/et_bg"
-                                android:drawableEnd="@drawable/ic_arrow_drop_down"
-                                android:drawablePadding="@dimen/_8sdp"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/satoshi_regular"
-                                android:gravity="center_vertical"
-                                android:inputType="none"
-                                android:maxLines="1"
-                                android:paddingLeft="@dimen/_12sdp"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:paddingRight="@dimen/_12sdp"
-                                android:paddingBottom="@dimen/_2sdp"
-                                android:textColor="@color/textPrimary"
-                                android:textColorHint="@color/textSecondary"
-                                android:textSize="@dimen/_12ssp"
-                                app:drawableTint="@color/textSecondary" />
-                        </LinearLayout>
+<!--                            <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+<!--                                android:id="@+id/outfitTypeInput"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_50sdp"-->
+<!--                                android:layout_marginTop="@dimen/_6sdp"-->
+<!--                                android:background="@drawable/et_bg"-->
+<!--                                android:drawableEnd="@drawable/ic_arrow_drop_down"-->
+<!--                                android:drawablePadding="@dimen/_8sdp"-->
+<!--                                android:ellipsize="end"-->
+<!--                                android:fontFamily="@font/satoshi_regular"-->
+<!--                                android:gravity="center_vertical"-->
+<!--                                android:inputType="none"-->
+<!--                                android:maxLines="1"-->
+<!--                                android:paddingLeft="@dimen/_12sdp"-->
+<!--                                android:paddingTop="@dimen/_2sdp"-->
+<!--                                android:paddingRight="@dimen/_12sdp"-->
+<!--                                android:paddingBottom="@dimen/_2sdp"-->
+<!--                                android:textColor="@color/textPrimary"-->
+<!--                                android:textColorHint="@color/textSecondary"-->
+<!--                                android:textSize="@dimen/_12ssp"-->
+<!--                                app:drawableTint="@color/textSecondary" />-->
+<!--                        </LinearLayout>-->
                     </LinearLayout>
 
                     <TextView
@@ -287,6 +287,124 @@
                         tools:itemCount="6"
                         tools:listitem="@layout/item_chip_option" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/section_spacing"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/resolution_label"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:baselineAligned="false"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/resolution_width_short"
+                                android:textColor="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                app:boxBackgroundColor="@color/white"
+                                app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                                app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                                app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                                app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                                app:boxStrokeColor="@color/strokeLight"
+                                app:hintEnabled="false">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/resolutionWidthInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:fontFamily="@font/satoshi_regular"
+                                    android:inputType="number"
+                                    android:paddingVertical="@dimen/_2sdp"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_12ssp"
+                                    tools:text="2000" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginHorizontal="@dimen/_12sdp"
+                            app:cardBackgroundColor="@color/primaryColor"
+                            app:cardCornerRadius="@dimen/_12sdp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageButton
+                                android:id="@+id/swapResolutionButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/resolution_swap"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/ic_swap_dimensions"
+                                app:tint="@color/white" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/satoshi_bold"
+                                android:text="@string/resolution_height_short"
+                                android:textColor="@color/textSecondary"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_6sdp"
+                                app:boxBackgroundColor="@color/white"
+                                app:boxCornerRadiusBottomEnd="@dimen/input_corner_radius"
+                                app:boxCornerRadiusBottomStart="@dimen/input_corner_radius"
+                                app:boxCornerRadiusTopEnd="@dimen/input_corner_radius"
+                                app:boxCornerRadiusTopStart="@dimen/input_corner_radius"
+                                app:boxStrokeColor="@color/strokeLight"
+                                app:hintEnabled="false">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/resolutionHeightInput"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:fontFamily="@font/satoshi_regular"
+                                    android:inputType="number"
+                                    android:paddingVertical="@dimen/_2sdp"
+                                    android:textColor="@color/textPrimary"
+                                    android:textSize="@dimen/_12ssp"
+                                    tools:text="2000" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -317,16 +435,32 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/modelRecyclerView"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingEnd="@dimen/_4sdp"
-                        tools:itemCount="5"
-                        tools:listitem="@layout/item_visual_card" />
+                        android:layout_height="@dimen/rail_item_height"
+                        android:layout_marginTop="@dimen/_8sdp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/modelRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingEnd="@dimen/_4sdp"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/item_visual_card" />
+
+                        <TextView
+                            android:id="@+id/modelEmptyText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:gravity="center"
+                            android:text="@string/studio_rail_empty_state"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
+                            android:visibility="gone" />
+                    </FrameLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -357,16 +491,32 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/backgroundRecyclerView"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingEnd="@dimen/_4sdp"
-                        tools:itemCount="4"
-                        tools:listitem="@layout/item_visual_card" />
+                        android:layout_height="@dimen/rail_item_height"
+                        android:layout_marginTop="@dimen/_8sdp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/backgroundRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingEnd="@dimen/_4sdp"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/item_visual_card" />
+
+                        <TextView
+                            android:id="@+id/backgroundEmptyText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:gravity="center"
+                            android:text="@string/studio_rail_empty_state"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
+                            android:visibility="gone" />
+                    </FrameLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -397,70 +547,119 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/poseRecyclerView"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingEnd="@dimen/_4sdp"
-                        tools:itemCount="4"
-                        tools:listitem="@layout/item_visual_card" />
+                        android:layout_height="@dimen/rail_item_height"
+                        android:layout_marginTop="@dimen/_8sdp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/poseRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingEnd="@dimen/_4sdp"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/item_visual_card" />
+
+                        <TextView
+                            android:id="@+id/poseEmptyText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:gravity="center"
+                            android:text="@string/studio_rail_empty_state"
+                            android:textColor="@color/ash"
+                            android:textSize="@dimen/_14ssp"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/poseGarmentSection"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/content_heading_spacing"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/business_logo_label"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14ssp" />
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/input_corner_radius"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/strokeLight"
-                        app:strokeWidth="@dimen/_1sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:text="@string/pose_optional_title"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="@dimen/_45sdp"
-                            android:paddingHorizontal="@dimen/_12sdp">
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:fontFamily="@font/satoshi_medium"
+                            android:text="@string/pose_optional_description"
+                            android:textColor="@color/textSecondary"
+                            android:textSize="@dimen/_12ssp" />
 
-                            <TextView
-                                android:id="@+id/businessLogoValue"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/satoshi_regular"
-                                android:maxLines="1"
-                                android:textColor="@color/textSecondary"
-                                android:textSize="@dimen/_12ssp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:text="logo.jpg" />
+                        <LinearLayout
+                            android:id="@+id/poseGarmentOptionsContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/businessLogoBrowse"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/satoshi_medium"
-                                android:text="@string/browse"
-                                android:textColor="@color/primaryColor"
-                                android:textSize="@dimen/_12ssp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/content_heading_spacing"-->
+<!--                        android:fontFamily="@font/satoshi_bold"-->
+<!--                        android:text="@string/business_logo_label"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_14ssp" />-->
+
+<!--                    <com.google.android.material.card.MaterialCardView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_6sdp"-->
+<!--                        app:cardBackgroundColor="@color/white"-->
+<!--                        app:cardCornerRadius="@dimen/input_corner_radius"-->
+<!--                        app:cardElevation="0dp"-->
+<!--                        app:strokeColor="@color/strokeLight"-->
+<!--                        app:strokeWidth="@dimen/_1sdp">-->
+
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:minHeight="@dimen/_45sdp"-->
+<!--                            android:paddingHorizontal="@dimen/_12sdp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/businessLogoValue"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:ellipsize="end"-->
+<!--                                android:fontFamily="@font/satoshi_regular"-->
+<!--                                android:maxLines="1"-->
+<!--                                android:textColor="@color/textSecondary"-->
+<!--                                android:textSize="@dimen/_12ssp"-->
+<!--                                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                app:layout_constraintEnd_toStartOf="@id/businessLogoBrowse"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                tools:text="logo.jpg" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/businessLogoBrowse"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:fontFamily="@font/satoshi_medium"-->
+<!--                                android:text="@string/browse"-->
+<!--                                android:textColor="@color/primaryColor"-->
+<!--                                android:textSize="@dimen/_12ssp"-->
+<!--                                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" />-->
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                    </com.google.android.material.card.MaterialCardView>-->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -496,6 +695,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/generate_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_14sdp"
@@ -520,9 +720,10 @@
                         android:layout_marginTop="@dimen/_10sdp">
 
                         <TextView
+                            android:id="@+id/credits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3"
+                            android:text="0"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14ssp"
                             android:fontFamily="@font/satoshi_bold"
@@ -533,12 +734,37 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Credits will be used"
+                            android:text="credits"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14ssp"
                             android:fontFamily="@font/satoshi_bold"
                             android:layout_marginStart="@dimen/_5sdp"
                             />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" (HD: 25 per images x"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"/>
+
+                        <TextView
+                            android:id="@+id/pose_count_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 0 "
+                            android:fontFamily="@font/satoshi_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="pose)"
+                            android:fontFamily="@font/satoshi_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"/>
 
                     </LinearLayout>
 
@@ -546,5 +772,67 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/generateLoadingOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/primaryColor"
+                app:trackColor="@color/primaryContainer" />
+
+            <TextView
+                android:id="@+id/generateProgressMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/generating_images"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/generateProgressBar"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="0"
+                app:indicatorColor="@color/primaryColor"
+                app:trackColor="@color/primaryContainer" />
+
+            <TextView
+                android:id="@+id/generateProgressPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/satoshi_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                tools:text="35%" />
+        </LinearLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

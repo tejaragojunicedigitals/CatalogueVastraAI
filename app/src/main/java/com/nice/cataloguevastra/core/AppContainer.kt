@@ -3,6 +3,7 @@ package com.nice.cataloguevastra.core
 import android.content.Context
 import com.nice.cataloguevastra.api.ApiClient
 import com.nice.cataloguevastra.api.ApiServices
+import com.nice.cataloguevastra.repositories.AssetsRepository
 import com.nice.cataloguevastra.repositories.AuthRepository
 import com.nice.cataloguevastra.repositories.CatalogueRepository
 import com.nice.cataloguevastra.repositories.CatalogueRepositoryImpl
@@ -30,6 +31,13 @@ class AppContainer(context: Context) {
             apiServices = apiServices,
             sessionManager = sessionManager,
             context = appContext
+        )
+    }
+
+    val assetsRepository: AssetsRepository by lazy {
+        AssetsRepository(
+            sessionManager = sessionManager,
+            apiServices = apiServices
         )
     }
 

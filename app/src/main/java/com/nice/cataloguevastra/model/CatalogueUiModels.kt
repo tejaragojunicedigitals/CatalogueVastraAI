@@ -13,12 +13,16 @@ data class CatalogueUiState(
     val selectedOutfitType: String,
     val platforms: List<ChipUiModel>,
     val aspectRatios: List<ChipUiModel>,
+    val resolutionWidth: String,
+    val resolutionHeight: String,
+    val isResolutionEditable: Boolean,
     val modelRail: RailSectionUiModel,
     val backgroundRail: RailSectionUiModel,
     val poseRail: RailSectionUiModel,
     val businessLogoName: String,
     val productCode: String,
-    val modelSelection: ModelSelectionUiModel
+    val modelSelection: ModelSelectionUiModel,
+    val isLoading: Boolean = false
 )
 
 data class CatalogueThemeUiModel(

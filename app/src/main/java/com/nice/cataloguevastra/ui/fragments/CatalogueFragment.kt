@@ -1,7 +1,11 @@
 package com.nice.cataloguevastra.ui.fragments
 
+import android.app.DownloadManager
+import android.content.Context
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +17,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.button.MaterialButton
@@ -22,15 +29,22 @@ import com.nice.cataloguevastra.R
 import com.nice.cataloguevastra.databinding.FragmentCatalogueBinding
 import com.nice.cataloguevastra.adapters.CataloguesAdapter
 import com.nice.cataloguevastra.model.CatalogueCardUiModel
+import com.nice.cataloguevastra.ui.base.BaseFragment
+import com.nice.cataloguevastra.viewmodel.CatalogueListUiState
+import com.nice.cataloguevastra.viewmodel.CatalogueListViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class CatalogueFragment : Fragment() {
+class CatalogueFragment : BaseFragment() {
 
     private var _binding: FragmentCatalogueBinding? = null
     private val binding get() = _binding!!
+    private val catalogueListViewModel: CatalogueListViewModel by activityViewModels()
     private lateinit var cataloguesAdapter: CataloguesAdapter
 
     private val allCatalogues = mutableListOf<CatalogueCardUiModel>()
@@ -41,10 +55,12 @@ class CatalogueFragment : Fragment() {
     private var selectedCategoryFilter = ""
     private var selectedPlatformFilter = ""
     private var activeFilterType = FilterType.DATE
+    private var isLoadingCatalogues = false
+    private var cataloguesErrorMessage: String? = null
+    private var isPullRefreshing = false
+    private var filterJob: Job? = null
 
     private val today: LocalDate = LocalDate.now()
-    private val titleDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy", Locale.ENGLISH)
-    private val subtitleDateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,23 +78,24 @@ class CatalogueFragment : Fragment() {
         selectedPlatformFilter = defaultLabel(FilterType.PLATFORM)
 
         setupRecyclerView()
-        seedCatalogueItems()
         setupListeners()
+        setupSwipeRefresh()
+        observeCatalogues()
         updateFilterLabels()
         updateFilterMenuState()
         applyFilters()
+        catalogueListViewModel.loadCatalogues(forceRefresh = true)
     }
+
+    override fun loaderViewId(): Int = R.id.catalogueLoadingOverlay
 
     private fun setupRecyclerView() = with(binding.cataloguesRecyclerView) {
         cataloguesAdapter = CataloguesAdapter(
-            onItemClick = {
-                findNavController().navigate(R.id.generatedCatalogueFragment)
+            onItemClick = { catalogue ->
+                openCataloguePreview(catalogue)
             },
             onDeleteClick = { catalogue ->
-                selectedCatalogueIds.remove(catalogue.id)
-                allCatalogues.removeAll { it.id == catalogue.id }
-                showMessage(getString(R.string.catalogues_deleted_message, catalogue.title))
-                applyFilters()
+                catalogueListViewModel.deleteCatalogue(catalogue.id)
             },
             onSelectionClick = { catalogue ->
                 toggleSelection(catalogue.id)
@@ -91,22 +108,23 @@ class CatalogueFragment : Fragment() {
         isNestedScrollingEnabled = false
     }
 
-    private fun seedCatalogueItems() {
-        if (allCatalogues.isNotEmpty()) return
+    private fun openCataloguePreview(catalogue: CatalogueCardUiModel) {
+        val imageUrls = catalogue.thumbnails.mapNotNull { it.url }
+            .ifEmpty { listOfNotNull(catalogue.previewImageUrl) }
 
-        allCatalogues += listOf(
-            buildCatalogue("5556", 0, 1, R.drawable.model, listOf(R.drawable.model), "Women's", "Amazon"),
-            buildCatalogue("5555", 0, 1, R.drawable.model_img, listOf(R.drawable.model_img), "Men's", "Myntra"),
-            buildCatalogue("5554", 1, 1, R.drawable.model, listOf(R.drawable.model, R.drawable.model_img), "Women's", "Shopify"),
-            buildCatalogue("5553", 2, 1, R.drawable.model, listOf(R.drawable.model), "Boy's", "Flipkart"),
-            buildCatalogue("5552", 3, 1, R.drawable.model, listOf(R.drawable.model, R.drawable.model_img), "Girl's", "Meesho"),
-            buildCatalogue("5357", 4, 1, R.drawable.model_img, listOf(R.drawable.model_img), "Men's", "Amazon"),
-            buildCatalogue("5355", 5, 1, R.drawable.model_img, listOf(R.drawable.model_img), "Women's", "Myntra"),
-            buildCatalogue("5354", 6, 1, R.drawable.model, listOf(R.drawable.model, R.drawable.model_img), "Girl's", "Shopify"),
-            buildCatalogue("5291", 8, 3, R.drawable.model_img, listOf(R.drawable.model_img, R.drawable.model, R.drawable.model_img), "Women's", "Meesho"),
-            buildCatalogue("5290", 10, 3, R.drawable.model, listOf(R.drawable.model, R.drawable.model_img, R.drawable.model), "Boy's", "Amazon"),
-            buildCatalogue("5289", 12, 3, R.drawable.model_img, listOf(R.drawable.model_img, R.drawable.model, R.drawable.model_img), "Girl's", "Flipkart"),
-            buildCatalogue("5195", 15, 1, R.drawable.model, listOf(R.drawable.model), "Men's", "Shopify")
+        if (imageUrls.isEmpty()) {
+            showMessage(getString(R.string.catalogues_empty_state))
+            return
+        }
+
+        findNavController().navigate(
+            R.id.assetPreviewFragment,
+            AssetPreviewFragment.createArgs(
+                title = catalogue.title,
+                imageUrls = ArrayList(imageUrls),
+                showThumbnails = imageUrls.size > 1,
+                source = AssetPreviewFragment.SOURCE_CATALOGUES
+            )
         )
     }
 
@@ -145,24 +163,60 @@ class CatalogueFragment : Fragment() {
         selectAllButton.setOnClickListener {
             if (visibleCatalogues.isEmpty()) return@setOnClickListener
 
-            val allVisibleSelected = visibleCatalogues.all { selectedCatalogueIds.contains(it.id) }
+            val selectableCatalogues = visibleCatalogues.take(MAX_DOWNLOAD_SELECTION)
+            val allVisibleSelected = selectableCatalogues.all { selectedCatalogueIds.contains(it.id) }
             if (allVisibleSelected) {
-                visibleCatalogues.forEach { selectedCatalogueIds.remove(it.id) }
+                selectableCatalogues.forEach { selectedCatalogueIds.remove(it.id) }
             } else {
-                visibleCatalogues.forEach { selectedCatalogueIds.add(it.id) }
+                selectedCatalogueIds.clear()
+                selectableCatalogues.forEach { selectedCatalogueIds.add(it.id) }
+                if (visibleCatalogues.size > MAX_DOWNLOAD_SELECTION) {
+                    showMessage(getString(R.string.catalogues_download_limit))
+                }
             }
             syncSelectionUi()
         }
 
         downloadSelectedButton.setOnClickListener {
-            val visibleCount = visibleCatalogues.size
-            val message = if (visibleCount == 0) {
-                getString(R.string.catalogues_empty_state)
-            } else {
-                getString(R.string.catalogues_download_all_message, visibleCount)
-            }
-            showMessage(message)
+            downloadSelectedCatalogues()
         }
+    }
+
+    private fun setupSwipeRefresh() = with(binding.swipeRefreshLayout) {
+        setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.primaryColor))
+        setProgressBackgroundColorSchemeColor(ContextCompat.getColor(requireContext(), R.color.white))
+        setOnRefreshListener {
+            isPullRefreshing = true
+            showLoader()
+            catalogueListViewModel.loadCatalogues(forceRefresh = true)
+        }
+    }
+
+    private fun observeCatalogues() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    catalogueListViewModel.uiState.collect(::renderCatalogueState)
+                }
+                launch {
+                    catalogueListViewModel.events.collect(::showMessage)
+                }
+            }
+        }
+    }
+
+    private fun renderCatalogueState(state: CatalogueListUiState) {
+        binding.swipeRefreshLayout.isRefreshing = isPullRefreshing && state.isLoading
+        if (!state.isLoading) {
+            isPullRefreshing = false
+        }
+        if (state.isLoading) showLoader() else hideLoader()
+        isLoadingCatalogues = state.isLoading
+        cataloguesErrorMessage = state.errorMessage
+        allCatalogues.clear()
+        allCatalogues += state.catalogues
+        selectedCatalogueIds.retainAll(state.catalogues.map { it.id }.toSet())
+        applyFilters()
     }
 
     private fun showFilterType(filterType: FilterType) {
@@ -330,31 +384,75 @@ class CatalogueFragment : Fragment() {
     }
 
     private fun applyFilters() {
-        visibleCatalogues = allCatalogues.filter { item ->
-            item.matchesSearch(searchQuery) &&
-                item.matchesDateFilter(selectedDateFilter) &&
-                item.matchesFilter(selectedCategoryFilter, defaultLabel(FilterType.CATEGORY), item.categoryTag) &&
-                item.matchesFilter(selectedPlatformFilter, defaultLabel(FilterType.PLATFORM), item.platformTag)
+        filterJob?.cancel()
+
+        val sourceCatalogues = allCatalogues.toList()
+        val query = searchQuery
+        val dateFilter = selectedDateFilter
+        val categoryFilter = selectedCategoryFilter
+        val platformFilter = selectedPlatformFilter
+        val defaultDateLabel = defaultLabel(FilterType.DATE)
+        val defaultCategoryLabel = defaultLabel(FilterType.CATEGORY)
+        val defaultPlatformLabel = defaultLabel(FilterType.PLATFORM)
+        val todayLabel = getString(R.string.catalogues_date_today)
+        val thisWeekLabel = getString(R.string.catalogues_date_this_week)
+        val thisMonthLabel = getString(R.string.catalogues_date_this_month)
+        val todayDate = today
+
+        filterJob = viewLifecycleOwner.lifecycleScope.launch {
+            val filteredCatalogues = withContext(Dispatchers.Default) {
+                sourceCatalogues.filter { item ->
+                    item.matchesSearch(query) &&
+                        item.matchesDateFilter(
+                            selectedValue = dateFilter,
+                            defaultValue = defaultDateLabel,
+                            todayLabel = todayLabel,
+                            thisWeekLabel = thisWeekLabel,
+                            thisMonthLabel = thisMonthLabel,
+                            todayDate = todayDate
+                        ) &&
+                        item.matchesFilter(categoryFilter, defaultCategoryLabel, item.categoryTag) &&
+                        item.matchesFilter(platformFilter, defaultPlatformLabel, item.platformTag)
+                }
+            }
+
+            visibleCatalogues = filteredCatalogues
+            selectedCatalogueIds.retainAll(filteredCatalogues.map { it.id }.toSet())
+            cataloguesAdapter.submitList(filteredCatalogues)
+            syncSelectionUi()
+            renderListState()
         }
-        cataloguesAdapter.submitList(visibleCatalogues)
-        syncSelectionUi()
-        binding.emptyStateText.isVisible = visibleCatalogues.isEmpty()
+    }
+
+    private fun renderListState() {
+        binding.cataloguesRecyclerView.alpha = if (isLoadingCatalogues && visibleCatalogues.isEmpty()) 0.35f else 1f
+        binding.emptyStateText.isVisible = isLoadingCatalogues || visibleCatalogues.isEmpty()
+        binding.emptyStateText.text = when {
+            isLoadingCatalogues -> getString(R.string.catalogues_loading)
+            !cataloguesErrorMessage.isNullOrBlank() -> cataloguesErrorMessage
+            else -> getString(R.string.catalogues_empty_state)
+        }
     }
 
     private fun toggleSelection(catalogueId: String) {
         if (!selectedCatalogueIds.add(catalogueId)) {
             selectedCatalogueIds.remove(catalogueId)
+        } else if (selectedCatalogueIds.size > MAX_DOWNLOAD_SELECTION) {
+            selectedCatalogueIds.remove(catalogueId)
+            showMessage(getString(R.string.catalogues_download_limit))
         }
         syncSelectionUi()
     }
 
     private fun syncSelectionUi() {
         cataloguesAdapter.updateSelection(selectedCatalogueIds)
-        binding.downloadSelectedButton.isEnabled = visibleCatalogues.isNotEmpty()
-        binding.downloadSelectedButton.alpha = if (visibleCatalogues.isNotEmpty()) 1f else 0.6f
+        val hasSelection = selectedCatalogueIds.isNotEmpty()
+        binding.downloadSelectedButton.isVisible = hasSelection
+        binding.downloadSelectedButton.isEnabled = hasSelection
+        binding.downloadSelectedButton.alpha = if (hasSelection) 1f else 0.6f
 
         val allVisibleSelected = visibleCatalogues.isNotEmpty() &&
-            visibleCatalogues.all { selectedCatalogueIds.contains(it.id) }
+            visibleCatalogues.take(MAX_DOWNLOAD_SELECTION).all { selectedCatalogueIds.contains(it.id) }
 
         binding.selectAllButton.text = if (allVisibleSelected) {
             getString(R.string.catalogues_clear_selection)
@@ -368,6 +466,58 @@ class CatalogueFragment : Fragment() {
                 R.drawable.ic_catalogue_select_unchecked
             }
         )
+    }
+
+    private fun downloadSelectedCatalogues() {
+        val selectedCatalogues = visibleCatalogues
+            .filter { selectedCatalogueIds.contains(it.id) }
+            .take(MAX_DOWNLOAD_SELECTION)
+
+        if (selectedCatalogues.isEmpty()) {
+            showMessage(getString(R.string.catalogues_download_select_prompt))
+            return
+        }
+
+        val downloads = selectedCatalogues.flatMap { catalogue ->
+            catalogue.downloadUrls().mapIndexed { index, imageUrl ->
+                imageUrl to buildCatalogueDownloadTitle(catalogue, index)
+            }
+        }
+
+        if (downloads.isEmpty()) {
+            showMessage(getString(R.string.catalogues_download_no_images))
+            return
+        }
+
+        val downloadManager = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        downloads.forEach { (imageUrl, title) ->
+            val request = DownloadManager.Request(Uri.parse(imageUrl))
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(true)
+                .setTitle(title)
+                .setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "$title.jpg"
+                )
+            downloadManager.enqueue(request)
+        }
+
+        showMessage(getString(R.string.catalogues_download_started, downloads.size))
+    }
+
+    private fun CatalogueCardUiModel.downloadUrls(): List<String> {
+        return thumbnails.mapNotNull { it.url?.takeIf(String::isNotBlank) }
+            .ifEmpty { listOfNotNull(previewImageUrl?.takeIf(String::isNotBlank)) }
+    }
+
+    private fun buildCatalogueDownloadTitle(catalogue: CatalogueCardUiModel, index: Int): String {
+        val safeTitle = catalogue.title
+            .ifBlank { "catalogue_${catalogue.id}" }
+            .replace("[^A-Za-z0-9_-]+".toRegex(), "_")
+            .trim('_')
+            .ifBlank { "catalogue_${catalogue.id}" }
+        return "${safeTitle}_${index + 1}"
     }
 
     private fun updateFilterLabels() = with(binding) {
@@ -386,28 +536,6 @@ class CatalogueFragment : Fragment() {
         }
     }
 
-    private fun buildCatalogue(
-        idSuffix: String,
-        daysAgo: Long,
-        imageCount: Int,
-        previewImageRes: Int,
-        thumbnails: List<Int>,
-        category: String,
-        platform: String
-    ): CatalogueCardUiModel {
-        val createdDate = today.minusDays(daysAgo)
-        return CatalogueCardUiModel(
-            id = "cat_$idSuffix",
-            title = "Catalogue_${idSuffix}_${createdDate.format(titleDateFormatter)} - $imageCount ${if (imageCount == 1) "Image" else "Images"}",
-            subtitle = "${createdDate.format(subtitleDateFormatter)} | $platform",
-            previewImageRes = previewImageRes,
-            thumbnails = thumbnails,
-            createdDateIso = createdDate.toString(),
-            categoryTag = category,
-            platformTag = platform
-        )
-    }
-
     private fun defaultLabel(filterType: FilterType): String {
         return when (filterType) {
             FilterType.DATE -> getString(R.string.catalogues_filter_date)
@@ -416,7 +544,7 @@ class CatalogueFragment : Fragment() {
         }
     }
 
-    private fun showMessage(message: String) {
+    override fun showMessage(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
@@ -429,18 +557,25 @@ class CatalogueFragment : Fragment() {
             platformTag.lowercase().contains(normalizedQuery)
     }
 
-    private fun CatalogueCardUiModel.matchesDateFilter(selectedValue: String): Boolean {
-        if (selectedValue == defaultLabel(FilterType.DATE)) return true
+    private fun CatalogueCardUiModel.matchesDateFilter(
+        selectedValue: String,
+        defaultValue: String,
+        todayLabel: String,
+        thisWeekLabel: String,
+        thisMonthLabel: String,
+        todayDate: LocalDate
+    ): Boolean {
+        if (selectedValue == defaultValue) return true
 
         val createdDate = LocalDate.parse(createdDateIso)
         return when (selectedValue) {
-            getString(R.string.catalogues_date_today) -> createdDate == today
-            getString(R.string.catalogues_date_this_week) -> {
-                val startOfWeek = today.with(DayOfWeek.MONDAY)
-                createdDate >= startOfWeek && createdDate <= today
+            todayLabel -> createdDate == todayDate
+            thisWeekLabel -> {
+                val startOfWeek = todayDate.with(DayOfWeek.MONDAY)
+                createdDate >= startOfWeek && createdDate <= todayDate
             }
-            getString(R.string.catalogues_date_this_month) -> {
-                createdDate.year == today.year && createdDate.month == today.month
+            thisMonthLabel -> {
+                createdDate.year == todayDate.year && createdDate.month == todayDate.month
             }
             else -> true
         }
@@ -456,6 +591,8 @@ class CatalogueFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        filterJob?.cancel()
+        filterJob = null
         _binding = null
     }
 
@@ -463,5 +600,9 @@ class CatalogueFragment : Fragment() {
         DATE,
         CATEGORY,
         PLATFORM
+    }
+
+    private companion object {
+        const val MAX_DOWNLOAD_SELECTION = 5
     }
 }

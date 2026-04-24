@@ -33,6 +33,16 @@
     <color name="placeholderWindowBottom">#8E8278</color>
     <color name="bottomNavInactive">#374151</color>
     <color name="dividerLight">#F1EAF5</color>
+    <color name="pricingPlanBorder">#E8E4EF</color>
+    <color name="pricingButtonSurface">#F8F6FC</color>
+    <color name="pricingHeroTop">#FFFFFF</color>
+    <color name="pricingHeroBottom">#F5F1FF</color>
+    <color name="pricingHighlightStart">#9250FF</color>
+    <color name="pricingHighlightEnd">#6B38F6</color>
+    <color name="pricingBestValueBg">#FFE39A</color>
+    <color name="pricingBestValueText">#785400</color>
+    <color name="pricingSectionFill">#F7F6FA</color>
+    <color name="pricingTableDivider">#E9E5F0</color>
 
     <color name="lightyellow">#FFF0CC</color>
     <color name="appBarIconTint">#666D7A</color>

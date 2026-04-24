@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryContainer"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/_4sdp">
+
+    <TextView
+        android:id="@+id/featureText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.4"
+        android:fontFamily="@font/satoshi_bold"
+        android:paddingHorizontal="@dimen/_14sdp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Features" />
+
+    <View
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="match_parent"
+        android:background="@color/pricingTableDivider" />
+
+    <TextView
+        android:id="@+id/starterText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/satoshi_bold"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Starter Pack" />
+
+    <View
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="match_parent"
+        android:background="@color/pricingTableDivider" />
+
+    <TextView
+        android:id="@+id/growthText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/satoshi_bold"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:textColor="@color/primaryColor"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Growth Pack" />
+
+    <View
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="match_parent"
+        android:background="@color/pricingTableDivider" />
+
+    <TextView
+        android:id="@+id/proText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/satoshi_bold"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Pro Pack" />
+
+</LinearLayout>

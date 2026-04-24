@@ -39,4 +39,14 @@
         android:name="com.nice.cataloguevastra.ui.fragments.GeneratedCatalogueFragment"
         android:label="@string/generated_catalogue_title" />
 
+    <fragment
+        android:id="@+id/buyCreditsFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.BuyCreditsFragment"
+        android:label="@string/buy_credits_title" />
+
+    <fragment
+        android:id="@+id/assetPreviewFragment"
+        android:name="com.nice.cataloguevastra.ui.fragments.AssetPreviewFragment"
+        android:label="@string/your_assets" />
+
 </navigation>

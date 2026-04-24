@@ -1,6 +1,7 @@
 package com.nice.cataloguevastra.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.nice.cataloguevastra.CatalogueVastraApp
@@ -65,6 +66,7 @@ class LoginViewModel(
             ).onSuccess {
                 _apiState.value = UiState.Success(Unit)
                 _events.emit(LoginEvent.NavigateToHome)
+                Log.e("TAG", "login: ${_apiState.value}", )
             }.onFailure { throwable ->
                 _apiState.value = UiState.Error(
                     throwable.message ?: "Unable to sign in right now."

@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import com.nice.cataloguevastra.ui.activities.LoginActivity
 import com.nice.cataloguevastra.databinding.ActivityMainBinding
+import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,10 +67,20 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         setupBottomNavigation(navController)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            updateBottomNavigationSelection(destination.id)
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+            updateBottomNavigationSelection(destination.id, arguments)
+            renderCreditsBalance()
         }
-        updateBottomNavigationSelection(navController.currentDestination?.id ?: R.id.studioFragment)
+        updateBottomNavigationSelection(
+            navController.currentDestination?.id ?: R.id.studioFragment,
+            navController.currentBackStackEntry?.arguments
+        )
+        renderCreditsBalance()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        renderCreditsBalance()
     }
 
     private fun setupBottomNavigation(navController: NavController) {
@@ -130,9 +141,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateBottomNavigationSelection(destinationId: Int) {
+    private fun updateBottomNavigationSelection(destinationId: Int, arguments: Bundle? = null) {
         val activeDestinationId = when (destinationId) {
+            R.id.buyCreditsFragment -> R.id.studioFragment
             R.id.generatedCatalogueFragment -> R.id.cataloguesFragment
+            R.id.assetPreviewFragment -> when (arguments?.getString(com.nice.cataloguevastra.ui.fragments.AssetPreviewFragment.ARG_SOURCE)) {
+                com.nice.cataloguevastra.ui.fragments.AssetPreviewFragment.SOURCE_CATALOGUES -> R.id.cataloguesFragment
+                else -> R.id.assetsFragment
+            }
             R.id.updatePasswordFragment -> R.id.accountFragment
             else -> destinationId
         }
@@ -152,6 +168,15 @@ class MainActivity : AppCompatActivity() {
             item.icon.setColorFilter(if (isSelected) selectedIconColor else unselectedIconColor)
             item.label.setTextColor(if (isSelected) selectedTextColor else unselectedTextColor)
         }
+    }
+
+    private fun renderCreditsBalance() {
+        val balance = (application as CatalogueVastraApp)
+            .appContainer
+            .sessionManager
+            .getCreditsBalance()
+        binding.shellAppBarInclude.creditBalanceTv.text =
+            NumberFormat.getIntegerInstance().format(balance)
     }
 
     private data class BottomNavItem(

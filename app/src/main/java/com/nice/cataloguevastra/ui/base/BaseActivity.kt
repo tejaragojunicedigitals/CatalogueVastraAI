@@ -50,6 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     open fun showLoader() {
+        loaderView?.bringToFront()
         loaderView?.visibility = View.VISIBLE
     }
 

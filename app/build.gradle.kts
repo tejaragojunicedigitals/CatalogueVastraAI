@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.swiperefreshlayout)
 //    implementation(libs.intuit.sdp)
 //    implementation(libs.intuit.ssp)
     implementation(libs.navigation.fragment.ktx)

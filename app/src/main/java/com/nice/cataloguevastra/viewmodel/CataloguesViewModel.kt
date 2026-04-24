@@ -1,6 +1,7 @@
 package com.nice.cataloguevastra.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,14 +12,17 @@ import com.nice.cataloguevastra.R
 import com.nice.cataloguevastra.model.CatalogueThemeUiModel
 import com.nice.cataloguevastra.model.CatalogueUiState
 import com.nice.cataloguevastra.model.ChipUiModel
+import com.nice.cataloguevastra.model.GenerateCatalogueResult
+import com.nice.cataloguevastra.model.GenerateCatalogueProgress
 import com.nice.cataloguevastra.model.GarmentSubcategoryUiModel
-import com.nice.cataloguevastra.model.ImageRatioItem
 import com.nice.cataloguevastra.model.ProcessVisualItem
 import com.nice.cataloguevastra.model.RailItemUiModel
 import com.nice.cataloguevastra.model.RailSectionUiModel
 import com.nice.cataloguevastra.repositories.CatalogueRepository
 import com.nice.cataloguevastra.repositories.DummyCatalogueRepository
+import com.nice.cataloguevastra.repositories.GenerateCatalogueParams
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 class CataloguesViewModel(
     private val repository: CatalogueRepository
@@ -28,6 +32,12 @@ class CataloguesViewModel(
     val uiState: LiveData<CatalogueUiState> = _uiState
     private val _message = MutableLiveData<String?>()
     val message: LiveData<String?> = _message
+    private val _generatedCatalogue = MutableLiveData<GenerateCatalogueResult?>()
+    val generatedCatalogue: LiveData<GenerateCatalogueResult?> = _generatedCatalogue
+    private val _generateProgress = MutableLiveData<GenerateCatalogueProgress?>()
+    val generateProgress: LiveData<GenerateCatalogueProgress?> = _generateProgress
+    private val _generateError = MutableLiveData<String?>()
+    val generateError: LiveData<String?> = _generateError
 
     init {
         loadThemes()
@@ -96,11 +106,46 @@ class CataloguesViewModel(
     }
 
     fun selectPlatform(id: String) = updateState {
-        copy(platforms = platforms.singleSelect(id))
+        val normalizedPlatformId = id.trim().lowercase()
+        val defaultRatio = PLATFORM_DEFAULT_RATIO[normalizedPlatformId] ?: DEFAULT_ASPECT_RATIO_LABEL
+        syncResolution(
+            selectedPlatforms = platforms.singleSelect(normalizedPlatformId),
+            selectedAspectRatios = buildAspectRatioChips(defaultRatio)
+        )
     }
 
     fun selectAspectRatio(id: String) = updateState {
-        copy(aspectRatios = aspectRatios.singleSelect(id))
+        syncResolution(selectedAspectRatios = buildAspectRatioChips(id.normalizeAspectRatioLabel()))
+    }
+
+    fun updateResolutionWidth(value: String) = updateState {
+        if (!isResolutionEditable) return@updateState this
+        copy(resolutionWidth = value.onlyDigits())
+    }
+
+    fun updateResolutionHeight(value: String) = updateState {
+        if (!isResolutionEditable) return@updateState this
+        copy(resolutionHeight = value.onlyDigits())
+    }
+
+    fun swapResolution() = updateState {
+        val width = resolutionWidth.toIntOrNull() ?: return@updateState this
+        val height = resolutionHeight.toIntOrNull() ?: return@updateState this
+        val platformId = selectedPlatformId()
+        val swappedWidth = height
+        val swappedHeight = width
+        val matchedRatio = findRatioForDimensions(platformId, swappedWidth, swappedHeight)
+
+        if (matchedRatio != null) {
+            syncResolution(selectedAspectRatios = buildAspectRatioChips(matchedRatio))
+        } else {
+            copy(
+                aspectRatios = buildAspectRatioChips(CUSTOM_RATIO_LABEL),
+                resolutionWidth = swappedWidth.toString(),
+                resolutionHeight = swappedHeight.toString(),
+                isResolutionEditable = true
+            )
+        }
     }
 
     fun selectModel(id: String) = updateState {
@@ -239,7 +284,7 @@ class CataloguesViewModel(
     }
 
     fun selectPose(id: String) = updateState {
-        copy(poseRail = poseRail.updateVisualSelection(id))
+        copy(poseRail = poseRail.toggleVisualSelection(id))
     }
 
     fun updateProductCode(code: String) = updateState {
@@ -250,8 +295,49 @@ class CataloguesViewModel(
         copy(businessLogoName = name)
     }
 
+    fun generateCatalogue(params: GenerateCatalogueParams) {
+        viewModelScope.launch {
+            updateLoading(true)
+            _generatedCatalogue.value = null
+            _generateError.value = null
+            _generateProgress.value = GenerateCatalogueProgress(
+                completed = 0,
+                total = params.poseIds.size.coerceAtLeast(1),
+                message = "Preparing generation..."
+            )
+            repository.generateCatalogue(params) { progress ->
+                _generateProgress.postValue(progress)
+            }
+                .onSuccess { result ->
+                    _generateProgress.value = GenerateCatalogueProgress(
+                        completed = result.imageUrls.size,
+                        total = result.imageUrls.size.coerceAtLeast(1),
+                        message = "All images are ready."
+                    )
+                    updateLoading(false)
+                    _generatedCatalogue.value = result
+                }
+                .onFailure { throwable ->
+                    updateLoading(false)
+                    _generateProgress.value = null
+                    val errorMessage = throwable.message ?: "Unable to generate catalogue."
+                    _generateError.value = errorMessage
+                    _message.value = errorMessage
+                }
+        }
+    }
+
     fun consumeMessage() {
         _message.value = null
+    }
+
+    fun consumeGeneratedCatalogue() {
+        _generatedCatalogue.value = null
+        _generateProgress.value = null
+    }
+
+    fun consumeGenerateError() {
+        _generateError.value = null
     }
 
     private inline fun updateState(transform: CatalogueUiState.() -> CatalogueUiState) {
@@ -259,8 +345,16 @@ class CataloguesViewModel(
         _uiState.value = currentState.transform()
     }
 
+    private fun updateLoading(isLoading: Boolean) {
+        val currentState = _uiState.value ?: return
+        if (currentState.isLoading != isLoading) {
+            _uiState.value = currentState.copy(isLoading = isLoading)
+        }
+    }
+
     private fun loadThemes() {
         viewModelScope.launch {
+            updateLoading(true)
             repository.getThemeList()
                 .onSuccess { themes ->
                     val themeUiModels = themes.mapNotNull { item ->
@@ -278,6 +372,7 @@ class CataloguesViewModel(
                     }
 
                     if (themeUiModels.isEmpty()) {
+                        updateLoading(false)
                         return@onSuccess
                     }
 
@@ -298,6 +393,7 @@ class CataloguesViewModel(
                     loadThemeContent(defaultTheme, clearExistingContent = false)
                 }
                 .onFailure { throwable ->
+                    updateLoading(false)
                     _message.value = throwable.message ?: "Unable to load catalogue themes."
                 }
         }
@@ -309,16 +405,19 @@ class CataloguesViewModel(
     ) {
         viewModelScope.launch {
             val baseState = _uiState.value ?: return@launch
-            if (clearExistingContent) {
-                _uiState.value = baseState.copy(
+            _uiState.value = if (clearExistingContent) {
+                baseState.copy(
                     selectedCatalogueFor = selectedTheme.name,
                     garmentSubcategories = emptyList(),
                     categoryOptions = emptyList(),
                     selectedCategory = DROPDOWN_PLACEHOLDER,
                     modelRail = baseState.modelRail.replaceVisuals(emptyList()),
                     backgroundRail = baseState.backgroundRail.replaceVisuals(emptyList()),
-                    poseRail = baseState.poseRail.replaceVisuals(emptyList())
+                    poseRail = baseState.poseRail.replaceVisuals(emptyList()),
+                    isLoading = true
                 )
+            } else {
+                baseState.copy(isLoading = true)
             }
 
             repository.getGarmentSubcategories(selectedTheme.themeFor)
@@ -345,7 +444,8 @@ class CataloguesViewModel(
                             selectedCategory = DROPDOWN_PLACEHOLDER,
                             modelRail = currentState.modelRail.replaceVisuals(emptyList()),
                             backgroundRail = currentState.backgroundRail.replaceVisuals(emptyList()),
-                            poseRail = currentState.poseRail.replaceVisuals(emptyList())
+                            poseRail = currentState.poseRail.replaceVisuals(emptyList()),
+                            isLoading = false
                         )
                         return@onSuccess
                     }
@@ -357,7 +457,8 @@ class CataloguesViewModel(
                         selectedCategory = defaultSubcategory.name,
                         modelRail = currentState.modelRail.replaceVisuals(emptyList()),
                         backgroundRail = currentState.backgroundRail.replaceVisuals(emptyList()),
-                        poseRail = currentState.poseRail.replaceVisuals(emptyList())
+                        poseRail = currentState.poseRail.replaceVisuals(emptyList()),
+                        isLoading = true
                     )
 
                     repository.getModelProcessTypes(
@@ -370,7 +471,7 @@ class CataloguesViewModel(
                             subcategories = subcategoryUiModels,
                             selectedSubcategory = defaultSubcategory,
                             data = data
-                        )
+                        ).copy(isLoading = false)
                     }.onFailure { throwable ->
                         val latestState = _uiState.value ?: return@onFailure
                         _uiState.value = latestState.copy(
@@ -380,7 +481,8 @@ class CataloguesViewModel(
                             selectedCategory = defaultSubcategory.name,
                             modelRail = latestState.modelRail.replaceVisuals(emptyList()),
                             backgroundRail = latestState.backgroundRail.replaceVisuals(emptyList()),
-                            poseRail = latestState.poseRail.replaceVisuals(emptyList())
+                            poseRail = latestState.poseRail.replaceVisuals(emptyList()),
+                            isLoading = false
                         )
                         _message.value = throwable.message ?: "Unable to load models and backgrounds."
                     }
@@ -394,7 +496,8 @@ class CataloguesViewModel(
                         selectedCategory = DROPDOWN_PLACEHOLDER,
                         modelRail = currentState.modelRail.replaceVisuals(emptyList()),
                         backgroundRail = currentState.backgroundRail.replaceVisuals(emptyList()),
-                        poseRail = currentState.poseRail.replaceVisuals(emptyList())
+                        poseRail = currentState.poseRail.replaceVisuals(emptyList()),
+                        isLoading = false
                     )
                     _message.value = throwable.message ?: "Unable to load garment subcategories."
                 }
@@ -403,6 +506,7 @@ class CataloguesViewModel(
 
     private fun loadModelProcessTypes(selectedSubcategory: GarmentSubcategoryUiModel) {
         viewModelScope.launch {
+            updateLoading(true)
             repository.getModelProcessTypes(
                 themeFor = selectedSubcategory.themeFor,
                 dressName = selectedSubcategory.id
@@ -415,8 +519,9 @@ class CataloguesViewModel(
                     subcategories = currentState.garmentSubcategories,
                     selectedSubcategory = selectedSubcategory,
                     data = data
-                )
+                ).copy(isLoading = false)
             }.onFailure { throwable ->
+                updateLoading(false)
                 _message.value = throwable.message ?: "Unable to load models and backgrounds."
             }
         }
@@ -432,6 +537,23 @@ class CataloguesViewModel(
                 when (item) {
                     is RailItemUiModel.Upload -> item
                     is RailItemUiModel.Visual -> item.copy(isSelected = item.id == selectedId)
+                }
+            }
+        )
+    }
+
+    private fun RailSectionUiModel.toggleVisualSelection(selectedId: String): RailSectionUiModel {
+        return copy(
+            items = items.map { item ->
+                when (item) {
+                    is RailItemUiModel.Upload -> item
+                    is RailItemUiModel.Visual -> {
+                        if (item.id == selectedId) {
+                            item.copy(isSelected = !item.isSelected)
+                        } else {
+                            item
+                        }
+                    }
                 }
             }
         )
@@ -488,18 +610,49 @@ class CataloguesViewModel(
         selectedSubcategory: GarmentSubcategoryUiModel,
         data: com.nice.cataloguevastra.model.ModelProcessTypesData
     ): CatalogueUiState {
-        val modelVisuals = data.modelTypes.orEmpty().toRailVisuals(
+        val modelSource = (
+            data.models.orEmpty() +
+                data.modelTypes.orEmpty() +
+                data.customModels.orEmpty()
+            ).distinctVisualsById()
+        val backgroundSource = (
+            data.backgrounds.orEmpty() +
+                data.customBackgrounds.orEmpty()
+            ).distinctVisualsById()
+        val poseSource = (
+            data.poses.orEmpty() +
+                data.fullCatalogue.orEmpty() +
+                data.customPoses.orEmpty()
+            ).distinctVisualsById()
+        val hasDressSpecificPoses = poseSource.any { item -> !item.dressName.isNullOrBlank() }
+        val dressFilteredPoses = if (hasDressSpecificPoses) {
+            poseSource.filter { item -> item.dressName == selectedSubcategory.id }
+        } else {
+            poseSource
+        }
+
+        if (BuildConfig.DEBUG) {
+            Log.d(
+                LOG_TAG,
+                "Studio assets: catalogue_for=${selectedTheme.themeFor}, dress_type=${selectedSubcategory.id}, " +
+                    "models=${modelSource.debugIds()}, backgrounds=${backgroundSource.debugIds()}, " +
+                    "poses=${dressFilteredPoses.debugIdsWithDress()}"
+            )
+        }
+
+        val modelVisuals = modelSource.toRailVisuals(
             defaultImageRes = R.drawable.model_img,
             selectedId = modelSelection.selectedModelId
         )
-        val backgroundVisuals = data.backgrounds.orEmpty().toRailVisuals(
+        val backgroundVisuals = backgroundSource.toRailVisuals(
             defaultImageRes = R.drawable.placeholder_bg_warm
         )
-        val poseVisuals = data.fullCatalogue.orEmpty().toRailVisuals(
-            defaultImageRes = R.drawable.model_img
+        val poseVisuals = dressFilteredPoses.toRailVisuals(
+            defaultImageRes = R.drawable.model_img,
+            selectFirstByDefault = false
         )
-        val ratioChips = data.imageRatios.orEmpty().toAspectRatioChips(aspectRatios)
-        val libraryItems = if (data.modelTypes.isNullOrEmpty()) {
+        val ratioChips = buildAspectRatioChips(selectedAspectRatioLabel())
+        val libraryItems = if (modelSource.isEmpty()) {
             modelSelection.libraryItemsByFilter
         } else {
             val apiModelItems = modelVisuals.map { visual ->
@@ -524,21 +677,26 @@ class CataloguesViewModel(
             poseRail = poseRail.replaceVisuals(poseVisuals),
             aspectRatios = ratioChips,
             modelSelection = modelSelection.copy(
-                selectedModelId = modelVisuals.firstOrNull()?.id ?: modelSelection.selectedModelId,
+                selectedModelId = modelVisuals.firstOrNull { it.isSelected }?.id
+                    ?: modelVisuals.firstOrNull()?.id
+                    ?: modelSelection.selectedModelId,
                 libraryItemsByFilter = libraryItems
             )
-        )
+        ).syncResolution(selectedAspectRatios = ratioChips)
     }
 
     private fun List<ProcessVisualItem>.toRailVisuals(
         defaultImageRes: Int,
-        selectedId: String? = null
+        selectedId: String? = null,
+        selectFirstByDefault: Boolean = true
     ): List<RailItemUiModel.Visual> {
         val availableIds = mapNotNull { it.id?.trim()?.takeIf(String::isNotBlank) }
         val fallbackSelectedId = if (!selectedId.isNullOrBlank() && availableIds.contains(selectedId)) {
             selectedId
-        } else {
+        } else if (selectFirstByDefault) {
             availableIds.firstOrNull().orEmpty()
+        } else {
+            ""
         }
         return mapNotNull { item ->
             val id = item.id?.trim().orEmpty()
@@ -547,30 +705,116 @@ class CataloguesViewModel(
             RailItemUiModel.Visual(
                 id = id,
                 imageRes = defaultImageRes,
-                imageUrl = item.modelImage.toAbsoluteImageUrl(),
-                label = item.title.orEmpty().ifBlank { "Item $id" },
+                imageUrl = item.bestImagePath().toAbsoluteImageUrl(),
+                label = item.displayName().ifBlank { "Item $id" },
                 isSelected = id == fallbackSelectedId
             )
         }
     }
 
-    private fun List<ImageRatioItem>.toAspectRatioChips(
-        existingChips: List<ChipUiModel>
-    ): List<ChipUiModel> {
-        if (isEmpty()) return existingChips
+    private fun List<ProcessVisualItem>.distinctVisualsById(): List<ProcessVisualItem> {
+        return distinctBy { item -> item.id?.trim().orEmpty() }
+    }
 
-        val selectedId = existingChips.firstOrNull { it.isSelected }?.id ?: firstOrNull()?.id?.toString().orEmpty()
-        return mapNotNull { item ->
-            val id = item.id?.toString().orEmpty()
-            val title = item.title?.trim().orEmpty()
-            if (id.isBlank() || title.isBlank()) return@mapNotNull null
+    private fun List<ProcessVisualItem>.debugIds(): String {
+        return joinToString(prefix = "[", postfix = "]") { item ->
+            item.id?.trim().orEmpty()
+        }
+    }
 
+    private fun List<ProcessVisualItem>.debugIdsWithDress(): String {
+        return joinToString(prefix = "[", postfix = "]") { item ->
+            val id = item.id?.trim().orEmpty()
+            val dress = item.dressName?.trim().orEmpty()
+            if (dress.isBlank()) id else "$id(dress=$dress)"
+        }
+    }
+
+    private fun ProcessVisualItem.bestImagePath(): String? {
+        return image
+            ?: thumbnail
+            ?: modelImageLegacy
+            ?: modelImage
+    }
+
+    private fun ProcessVisualItem.displayName(): String {
+        return name?.trim().orEmpty()
+            .ifBlank { title?.trim().orEmpty() }
+    }
+
+    private fun buildAspectRatioChips(selectedRatioLabel: String): List<ChipUiModel> {
+        val normalizedSelectedRatio = selectedRatioLabel.normalizeAspectRatioLabel()
+            .takeIf { ASPECT_RATIO_ORDER.contains(it) }
+            ?: DEFAULT_ASPECT_RATIO_LABEL
+
+        return ASPECT_RATIO_ORDER.map { label ->
             ChipUiModel(
-                id = id,
-                label = title.replace('.', ':'),
-                isSelected = id == selectedId
+                id = label,
+                label = label,
+                isSelected = label == normalizedSelectedRatio
             )
         }
+    }
+
+    private fun String?.normalizeAspectRatioLabel(): String {
+        return this?.trim().orEmpty().replace('.', ':')
+    }
+
+    private fun String.onlyDigits(): String {
+        return filter(Char::isDigit).take(5)
+    }
+
+    private fun CatalogueUiState.selectedPlatformId(): String {
+        return platforms.firstOrNull { it.isSelected }?.id?.trim()?.lowercase() ?: DEFAULT_PLATFORM_ID
+    }
+
+    private fun CatalogueUiState.selectedAspectRatioLabel(): String {
+        return aspectRatios.firstOrNull { it.isSelected }
+            ?.label
+            ?.normalizeAspectRatioLabel()
+            ?.takeIf { it.isNotBlank() }
+            ?: (PLATFORM_DEFAULT_RATIO[selectedPlatformId()] ?: DEFAULT_ASPECT_RATIO_LABEL)
+    }
+
+    private fun CatalogueUiState.syncResolution(
+        selectedPlatforms: List<ChipUiModel> = platforms,
+        selectedAspectRatios: List<ChipUiModel> = aspectRatios
+    ): CatalogueUiState {
+        val platformId = selectedPlatforms.firstOrNull { it.isSelected }?.id?.trim()?.lowercase()
+            ?: DEFAULT_PLATFORM_ID
+        val ratioLabel = selectedAspectRatios.firstOrNull { it.isSelected }
+            ?.label
+            ?.normalizeAspectRatioLabel()
+            ?: DEFAULT_ASPECT_RATIO_LABEL
+        val preset = resolutionFor(platformId, ratioLabel)
+
+        return copy(
+            platforms = selectedPlatforms,
+            aspectRatios = selectedAspectRatios,
+            resolutionWidth = preset.w.toString(),
+            resolutionHeight = preset.h.toString(),
+            isResolutionEditable = ratioLabel == CUSTOM_RATIO_LABEL
+        )
+    }
+
+    private fun resolutionFor(platformId: String, ratioLabel: String): ResolutionPreset {
+        return PLATFORM_RESOLUTION_OVERRIDES[platformId]?.get(ratioLabel)
+            ?: RESOLUTION_PRESETS[ratioLabel]
+            ?: RESOLUTION_PRESETS.getValue(CUSTOM_RATIO_LABEL)
+    }
+
+    private fun findRatioForDimensions(platformId: String, width: Int, height: Int): String? {
+        return ASPECT_RATIO_ORDER
+            .filterNot { it == CUSTOM_RATIO_LABEL }
+            .firstOrNull { ratioLabel ->
+                val preset = resolutionFor(platformId, ratioLabel)
+                preset.w == width && preset.h == height
+            } ?: ASPECT_RATIO_ORDER
+            .filterNot { it == CUSTOM_RATIO_LABEL }
+            .firstOrNull { ratioLabel ->
+                val preset = resolutionFor(platformId, ratioLabel)
+                abs((preset.w.toLong() * height) - (preset.h.toLong() * width)) == 0L
+            }
     }
 
     private fun String?.toAbsoluteImageUrl(): String? {
@@ -585,8 +829,114 @@ class CataloguesViewModel(
 
     companion object {
         const val DROPDOWN_PLACEHOLDER = "Select"
+        private const val DEFAULT_ASPECT_RATIO_LABEL = "1:1"
+        private const val CUSTOM_RATIO_LABEL = "Custom"
+        private const val DEFAULT_PLATFORM_ID = "amazon"
         private const val DEFAULT_THEME_NAME = "Women"
         private const val DEFAULT_THEME_FOR = "women"
+        private const val LOG_TAG = "CataloguesViewModel"
+        private val ASPECT_RATIO_ORDER = listOf(
+            "1:1",
+            "3:4",
+            "4:3",
+            "4:5",
+            "16:9",
+            "9:16",
+            CUSTOM_RATIO_LABEL
+        )
+        private val RESOLUTION_PRESETS = mapOf(
+            "1:1" to ResolutionPreset(2000, 2000),
+            "3:4" to ResolutionPreset(1500, 2000),
+            "4:3" to ResolutionPreset(2000, 1500),
+            "4:5" to ResolutionPreset(1600, 2000),
+            "16:9" to ResolutionPreset(2048, 1152),
+            "9:16" to ResolutionPreset(1152, 2048),
+            CUSTOM_RATIO_LABEL to ResolutionPreset(2000, 2000)
+        )
+        private val PLATFORM_DEFAULT_RATIO = mapOf(
+            "amazon" to "1:1",
+            "flipkart" to "1:1",
+            "ebay" to "1:1",
+            "shopify" to "1:1",
+            "myntra" to "3:4",
+            "nykaa fashion" to "3:4",
+            "etsy" to "1:1",
+            "custom" to "1:1"
+        )
+        private val PLATFORM_RESOLUTION_OVERRIDES = mapOf(
+            "amazon" to mapOf(
+                "1:1" to ResolutionPreset(2000, 2000),
+                "3:4" to ResolutionPreset(1500, 2000),
+                "4:3" to ResolutionPreset(2000, 1500),
+                "4:5" to ResolutionPreset(1600, 2000),
+                "16:9" to ResolutionPreset(2000, 1125),
+                "9:16" to ResolutionPreset(1125, 2000),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(2000, 2000)
+            ),
+            "flipkart" to mapOf(
+                "1:1" to ResolutionPreset(1500, 1500),
+                "3:4" to ResolutionPreset(1125, 1500),
+                "4:3" to ResolutionPreset(1500, 1125),
+                "4:5" to ResolutionPreset(1200, 1500),
+                "16:9" to ResolutionPreset(1500, 844),
+                "9:16" to ResolutionPreset(844, 1500),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(1500, 1500)
+            ),
+            "ebay" to mapOf(
+                "1:1" to ResolutionPreset(1600, 1600),
+                "3:4" to ResolutionPreset(1200, 1600),
+                "4:3" to ResolutionPreset(1600, 1200),
+                "4:5" to ResolutionPreset(1280, 1600),
+                "16:9" to ResolutionPreset(1600, 900),
+                "9:16" to ResolutionPreset(900, 1600),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(1600, 1600)
+            ),
+            "shopify" to mapOf(
+                "1:1" to ResolutionPreset(2048, 2048),
+                "3:4" to ResolutionPreset(1536, 2048),
+                "4:3" to ResolutionPreset(2048, 1536),
+                "4:5" to ResolutionPreset(1638, 2048),
+                "16:9" to ResolutionPreset(2048, 1152),
+                "9:16" to ResolutionPreset(1152, 2048),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(2048, 2048)
+            ),
+            "myntra" to mapOf(
+                "1:1" to ResolutionPreset(2000, 2000),
+                "3:4" to ResolutionPreset(1500, 2000),
+                "4:3" to ResolutionPreset(2000, 1500),
+                "4:5" to ResolutionPreset(1600, 2000),
+                "16:9" to ResolutionPreset(2000, 1125),
+                "9:16" to ResolutionPreset(1125, 2000),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(1500, 2000)
+            ),
+            "nykaa fashion" to mapOf(
+                "1:1" to ResolutionPreset(2000, 2000),
+                "3:4" to ResolutionPreset(1500, 2000),
+                "4:3" to ResolutionPreset(2000, 1500),
+                "4:5" to ResolutionPreset(1600, 2000),
+                "16:9" to ResolutionPreset(2000, 1125),
+                "9:16" to ResolutionPreset(1125, 2000),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(1500, 2000)
+            ),
+            "etsy" to mapOf(
+                "1:1" to ResolutionPreset(2000, 2000),
+                "3:4" to ResolutionPreset(1500, 2000),
+                "4:3" to ResolutionPreset(2000, 1500),
+                "4:5" to ResolutionPreset(1600, 2000),
+                "16:9" to ResolutionPreset(2000, 1125),
+                "9:16" to ResolutionPreset(1125, 2000),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(2000, 2000)
+            ),
+            "custom" to mapOf(
+                "1:1" to ResolutionPreset(2000, 2000),
+                "3:4" to ResolutionPreset(1500, 2000),
+                "4:3" to ResolutionPreset(2000, 1500),
+                "4:5" to ResolutionPreset(1600, 2000),
+                "16:9" to ResolutionPreset(2048, 1152),
+                "9:16" to ResolutionPreset(1152, 2048),
+                CUSTOM_RATIO_LABEL to ResolutionPreset(2000, 2000)
+            )
+        )
 
         fun factory(
             repository: CatalogueRepository = DummyCatalogueRepository()
@@ -599,4 +949,9 @@ class CataloguesViewModel(
             }
         }
     }
+
+    private data class ResolutionPreset(
+        val w: Int,
+        val h: Int
+    )
 }

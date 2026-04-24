@@ -39,6 +39,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun showLoader() {
+        loaderView?.bringToFront()
         loaderView?.visibility = View.VISIBLE
     }
 

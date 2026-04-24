@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
 import com.nice.cataloguevastra.R
-import com.nice.cataloguevastra.CatalogueVastraApp
 import com.nice.cataloguevastra.databinding.ActivitySignUpBinding
 import com.nice.cataloguevastra.ui.base.BaseBindingActivity
 import com.nice.cataloguevastra.utils.ImagePickerManager
@@ -73,7 +73,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>() {
             binding.businessNameInput.error = state.businessNameError
             binding.emailInput.error = state.emailError
             binding.phoneInput.error = state.phoneNumberError
-            binding.passwordInput.error = state.passwordError
+            binding.passwordInputLayout.error = state.passwordError
 
             renderSelectedImage(
                 imageUri = state.userImage?.uri,
@@ -120,10 +120,10 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>() {
         collectLatestLifecycleFlow(viewModel.events) { event ->
             when (event) {
                 is SignUpEvent.NavigateToLogin -> {
+                    Toast.makeText(this, event.message, Toast.LENGTH_SHORT).show()
                     startActivity(
                         Intent(this, LoginActivity::class.java).apply {
                             putExtra(LoginActivity.EXTRA_USERNAME, event.username)
-                            putExtra(LoginActivity.EXTRA_MESSAGE, event.message)
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                         }
                     )

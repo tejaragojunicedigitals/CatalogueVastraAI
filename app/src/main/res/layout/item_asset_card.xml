@@ -27,9 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_180sdp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/placeholder_bg_window"
                 android:scaleType="fitXY"
-                tools:src="@drawable/model_img" />
+                tools:src="@drawable/ic_gallery" />
 
             <ImageView
                 android:id="@+id/selectionIcon"
